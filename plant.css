@@ -29,14 +29,14 @@ button {
   justify-content: space-evenly;
   display: flex;
 }
-.water-button {
+.water-button-1, .water-button-2 {
   display: none;
 }
-.sunlight-button {
+.sunlight-button-1, .sunlight-button-2 {
   display: none;
 }
 .leave-button-1, .leave-button-2, .leave-button-3, .leave-button-4,
-.leave-button-5, .leave-button-6 {
+.leave-button-5, .leave-button-6, .leave-button-7, .leave-button-8 {
   display: none;
 }
 
@@ -194,6 +194,8 @@ img {
   display: flex;
 }
 
-.stage-1, .stage-2, .stage-3, .stage-4, .stage-5 {
+.stage-1, .stage-2, .stage-3, .stage-4, .stage-5,
+.stage-6, .stage-7, .stage-8, .stage-9, .stage-10,
+.stage-11 {
   display: none;
 }
