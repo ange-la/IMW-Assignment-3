@@ -9,6 +9,38 @@
     font-style: normal;
 }
 
+body {
+  background-color: #21512b;
+}
+
+
+
+/* BUTTONS */
+button {
+  display: flex;
+  font-size: 18px;
+  font-family: sans-serif;
+  padding: 10px;
+}
+.buttons {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  justify-content: space-evenly;
+  display: flex;
+}
+.water-button {
+  display: none;
+}
+.sunlight-button {
+  display: none;
+}
+.leave-button-1, .leave-button-2, .leave-button-3, .leave-button-4,
+.leave-button-5, .leave-button-6 {
+  display: none;
+}
+
+
 
 /* Split Screen for 2 Options @ https://www.w3schools.com/howto/howto_css_split_screen.asp*/
 /* TEXT */
@@ -138,4 +170,30 @@ h1 {
   margin-top: -100px;
   margin-left: auto; /* to center the shape */
   margin-right: auto; /* to center the shape */
+}
+.small-soil-nurture {
+  background-color: #201613;
+  width: 140px;
+  height: 35px;
+  border-radius: 50%;
+  margin-top: -100px;
+  margin-left: auto; /* to center the shape */
+  margin-right: auto; /* to center the shape */
+  display: none;
+}
+
+
+
+/* CORPSE FLOWER GROWING */
+img {
+  height: 700px;
+  width: auto;
+  margin-top: -710px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.stage-1, .stage-2, .stage-3, .stage-4, .stage-5 {
+  display: none;
 }
