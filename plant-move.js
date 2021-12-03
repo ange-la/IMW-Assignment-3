@@ -30,10 +30,6 @@ $(document).ready(function(){
 });
 
 
-
-/* ORGANIZE THIS DIFFERENTLY by firstClicked1, firstClicked2, etc */
-
-
 /* STAGE 1 appears after WATER + SUNLIGHT + LEAVE all clicked in order */
 /* Trigger event after 2 buttons clicked in order */
 /* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
