@@ -29,13 +29,14 @@ button {
   justify-content: space-evenly;
   display: flex;
 }
-.water-button-1 {
+.water-button-1, .water-button-2 {
   display: none;
 }
-.sunlight-button-1 {
+.sunlight-button-1, .sunlight-button-2 {
   display: none;
 }
-.leave-button-1 {
+.leave-button-1, .leave-button-2, .leave-button-3, .leave-button-4,
+.leave-button-5, .leave-button-6, .leave-button-7, .leave-button-8 {
   display: none;
 }
 
@@ -134,7 +135,7 @@ h1 {
 /* Ellipse */
 .ground-shadow-light {
   background-color: #1e4827;
-  width: 400px;
+  width: 500px;
   height: 150px;
   border-radius: 50%;
   margin-top: 200px;
@@ -144,7 +145,7 @@ h1 {
 }
 .ground-shadow-dark {
   background-color: #08120a;
-  width: 400px;
+  width: 500px;
   height: 150px;
   border-radius: 50%;
   margin-top: 200px;
@@ -154,7 +155,7 @@ h1 {
 }
 .soil-ground {
   background-color: #2a1e1a;
-  width: 400px;
+  width: 500px;
   height: 150px;
   border-radius: 50%;
   margin-top: 200px;
@@ -195,6 +196,6 @@ img {
 
 .stage-1, .stage-2, .stage-3, .stage-4, .stage-5,
 .stage-6, .stage-7, .stage-8, .stage-9, .stage-10,
-.stage-11, .stage-12, .stage-13 {
+.stage-11 {
   display: none;
 }

@@ -37,303 +37,171 @@ $(document).ready(function(){
 /* STAGE 1 appears after WATER + SUNLIGHT + LEAVE all clicked in order */
 /* Trigger event after 2 buttons clicked in order */
 /* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
+$(function(){
+  var firstClicked;
+  var secondClicked;
+  var thirdClicked;
 /* WATER button darkens the soil */
 /* @ https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery */
-
-
-
-/* 1-WATER > firstWater */
-$(document).ready(function(){
-  var firstWater;
-  var secondWater;
-  var thirdWater;
-  var fourthWater;
-  var fifthWater;
-  var sixthWater;
-  var seventhWater;
-  var eighthWater;
-  var ninthWater;
-  var tenthWater;
-  var eleventhWater;
-  var twelevthWater;
-  var thirteenthWater;
-  var fourteenthWater;
-  var fifteenthWater;
-  var sixteenthWater;
-  var seventeetnWater;
-  var eighteenthWater;
-  var ninteenthWater;
-  var twentiethWater;
-  var twentyfirstWater;
-  var twentysecondWater;
-  var twentythirdWater;
-  var twentyfourthWater;
-  var twentyfifthWater;
-  /* Darken soil if watered first */
-  $(".water-button-1").click(function(){
-    firstWater = true;
+$(".water-button-1").click(function() {
+  firstClicked = true;
+  $(".soil-ground").css({'background-color': '#201613'});
+  $(".small-soil-nurture").css({'background-color': '#160c09'});
+  if(fourthClicked) {
+/* STAGE 4 */
+    fifthClicked = true;
+    /* remove(); to prevent stage 3 from showing again after */
+    $(".stage-3").remove();
+    $(".stage-4").show();
+  }
+/* STAGE 8 */
+  if(ninthClicked) {
+    tenthClicked = true;
+    /* remove(); to prevent stage 7 from showing again after */
+    $(".leave-button-6").remove();
+    $(".leave-button-7").show();
+  }
+});
+/* STAGE 1 */
+$(".sunlight-button-1").click(function() {
+  if(firstClicked) {
+    secondClicked = true;
+    $(".stage-1").show();
+    $(".soil-ground").css({'background-color': '#2d231f'});
+    $(".small-soil-nurture").css({'background-color': '#1e1715'});
+  }
+  if (thirdClicked) {
+    $(".soil-ground").css({'background-color': '#5a453f'});
+    $(".small-soil-nurture").css({'background-color': '#4b3a34'});
+    /* SWITCH SUNLIGHT" BUTTON WITH NEW */
+    $(".sunlight-button-1").remove();
+    $(".sunlight-button-2").show();
+  }
+});
+/* STAGE 2 */
+$(".leave-button-1").click(function() {
+  if(secondClicked) {
+    thirdClicked = true;
+    /* remove(); to prevent stage 1 from showing again after */
+    /* @ https://api.jquery.com/remove/ */
+    $(".stage-1").remove();
+    $(".stage-2").show();
+    $(".soil-ground").css({'background-color': '#3c2e2a'});
+    $(".small-soil-nurture").css({'background-color': '#2a201d'});
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-1").remove();
+    $(".leave-button-2").show();
+  }
+});
+/* STAGE 3 */
+$(".leave-button-2").click(function() {
+  if (thirdClicked) {
+    fourthClicked = true;
+    $(".soil-ground").css({'background-color': '#4b3934'});
+    $(".small-soil-nurture").css({'background-color': '#2d231f'});
+    /* remove(); to prevent stage 2 from showing again after */
+    $(".stage-2").remove();
+    $(".stage-3").show();
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-2").remove();
+    $(".leave-button-3").show();
+  }
+});
+/* IN BETWEEN STAGE 4 AND 5 */
+$(".leave-button-3").click(function() {
+  if (fifthClicked) {
+    sixthClicked = true;
+    $(".soil-ground").css({'background-color': '#30211d'});
+    $(".small-soil-nurture").css({'background-color': '#24140f'});
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-3").remove();
+    $(".leave-button-4").show();
+  }
+});
+/* STAGE 5 */
+$(".leave-button-4").click(function() {
+  if (sixthClicked) {
+    seventhClicked = true;
+    $(".soil-ground").css({'background-color': '#402c26'});
+    $(".small-soil-nurture").css({'background-color': '#361e17'});
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-4").remove();
+    $(".leave-button-5").show();
+    /* remove(); to prevent stage 4 from showing again after */
+    $(".stage-4").remove();
+    $(".stage-5").show();
+  }
+});
+/* IN BETWEEN STAGES 5 AND 6 */
+$(".sunlight-button-2").click(function() {
+  if (seventhClicked) {
+    eighthClicked = true;
+    $(".soil-ground").css({'background-color': '#30211d'});
+    $(".small-soil-nurture").css({'background-color': '#24140f'});
+  }
+});
+/* STAGE 6 */
+$(".leave-button-5").click(function() {
+  if (eighthClicked) {
+    ninthClicked = true;
+    $(".soil-ground").css({'background-color': '#402c26'});
+    $(".small-soil-nurture").css({'background-color': '#361e17'});
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-5").remove();
+    $(".leave-button-6").show();
+    /* remove(); to prevent stage 5 from showing again after */
+    $(".stage-5").remove();
+    $(".stage-6").show();
+  }
+});
+/* STAGE 7 */
+$(".leave-button-6").click(function() {
+  if (eighthClicked) {
+    ninthClicked = true;
+    $(".soil-ground").css({'background-color': '#604239'});
+    $(".small-soil-nurture").css({'background-color': '#593226'});
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-6").remove();
+    $(".leave-button-7").show();
+    /* remove(); to prevent stage 6 from showing again after */
+    $(".stage-6").remove();
+    $(".stage-7").show();
+  }
+});
+/* STAGE 9 */
+$(".leave-button-7").click(function() {
+  if(tenthClicked) {
+    eleventhClicked = true;
+    $(".soil-ground").css({'background-color': '#402c26'});
+    $(".small-soil-nurture").css({'background-color': '#361e16'});
+    /* SWITCH "LEAVE" BUTTON WITH NEW */
+    $(".leave-button-7").remove();
+    $(".leave-button-8").show();
+    /* remove(); to prevent stage 8 from showing again after */
+    $(".stage-8").remove();
+    $(".stage-9").show();
+  }
+});
+/* STAGE 10 */
+$(".leave-button-8").click(function() {
+  if(eleventhClicked) {
+    twelevthClicked = true;
+    $(".soil-ground").css({'background-color': '#604239'});
+    $(".small-soil-nurture").css({'background-color': '#5b3225'});
+    /* remove(); to prevent stage 9 from showing again after */
+    $(".stage-9").remove();
+    $(".stage-10").show();
+  }
+});
+/* STAGE 11 */
+$(".water-button-2").click(function() {
+  if(twelevthClicked) {
+    thirteenthClicked = true;
     $(".soil-ground").css({'background-color': '#201613'});
     $(".small-soil-nurture").css({'background-color': '#160c09'});
-    /* Change function of water-button-1 @https://stackoverflow.com/questions/4506219/how-to-change-onclick-event-with-jquery/8188681 */
-    /* STAGE 1 show */
-    $(".water-button-1").unbind("click");
-    $(".water-button-1").click(function(){
-      fourthWater = true;
-      if (thirdWater){
-        $(".soil-ground").css({'background-color': '#201613'});
-        $(".small-soil-nurture").css({'background-color': '#160c09'});
-        $(".stage-1").show();
-      }
-      /* Change function of water-button-1 */
-      $(".water-button-1").unbind("click");
-      $(".water-button-1").click(function(){
-        seventhWater = true;
-        if (sixthWater){
-          $(".soil-ground").css({'background-color': '#201613'});
-          $(".small-soil-nurture").css({'background-color': '#160c09'});
-        }
-        /* Change function of water-button-1 */
-        /* STAGE 4 show + STAGE 3 remove */
-        $(".water-button-1").unbind("click");
-        $(".water-button-1").click(function(){
-          tenthWater = true;
-          if (ninthWater){
-            $(".soil-ground").css({'background-color': '#201613'});
-            $(".small-soil-nurture").css({'background-color': '#160c09'});
-            $(".stage-3").remove();
-            $(".stage-4").show();
-          }
-          /* Change function of water-button-1 */
-          /* STAGE 6 show + STAGE 5 remove */
-          $(".water-button-1").unbind("click");
-          $(".water-button-1").click(function(){
-            thirteenthWater = true;
-            if (twelevthWater){
-              $(".soil-ground").css({'background-color': '#201613'});
-              $(".small-soil-nurture").css({'background-color': '#160c09'});
-              $(".stage-5").remove();
-              $(".stage-6").show();
-            }
-            /* Change function of water-button-1 */
-            $(".water-button-1").unbind("click");
-            $(".water-button-1").click(function(){
-              sixteenthWater = true;
-              if (fifteenthWater){
-                $(".soil-ground").css({'background-color': '#201613'});
-                $(".small-soil-nurture").css({'background-color': '#160c09'});
-              }
-              /* Change function of water-button-1 */
-              $(".water-button-1").unbind("click");
-              $(".water-button-1").click(function(){
-                eighteenthWater = true;
-                if (seventeenthWater) {
-                  $(".soil-ground").css({'background-color': '#201613'});
-                  $(".small-soil-nurture").css({'background-color': '#160c09'});
-                }
-                /* Change function of water-button-1 */
-                $(".water-button-1").unbind("click");
-                $(".water-button-1").click(function(){
-                  twentiethWater = true;
-                  if (ninteenthWater){
-                    $(".soil-ground").css({'background-color': '#201613'});
-                    $(".small-soil-nurture").css({'background-color': '#160c09'});
-                  }
-                  /* Change function of water-button-1 */
-                  $(".water-button-1").unbind("click");
-                  $(".water-button-1").click(function(){
-                    twentysecondWater = true;
-                    if (twentyfirstWater) {
-                      $(".soil-ground").css({'background-color': '#201613'});
-                      $(".small-soil-nurture").css({'background-color': '#160c09'});
-                    }
-                    /* Change function of water-button-1 */
-                    $(".water-button-1").unbind("click");
-                    $(".water-button-1").click(function(){
-                      twentyfourthWater = true;
-                      if (twentythirdWater){
-                        $(".soil-ground").css({'background-color': '#201613'});
-                        $(".small-soil-nurture").css({'background-color': '#160c09'});
-                      }
-                      /* Change function of water-button-1 */
-                      /* STAGE 13 show + STAGE 12 remove */
-                      /* FULLY GROWN CORSE FLOWER */
-                      $(".water-button-1").unbind("click");
-                      $(".water-button-1").click(function(){
-                        if (twentyfifthWater){
-                          $(".soil-ground").css({'background-color': '#201613'});
-                          $(".small-soil-nurture").css({'background-color': '#160c09'});
-                          $(".stage-12").remove();
-                          $(".stage-13").show();
-                        }
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
-  });
-  /* lighten soil after firstWater */
-  $(".sunlight-button-1").click(function(){
-    secondWater = true;
-    if (firstWater){
-      $(".soil-ground").css({'background-color': '#30211d'});
-      $(".small-soil-nurture").css({'background-color': '#24140f'});
-    }
-    /* Change function of sunlight-button-1 @https://stackoverflow.com/questions/4506219/how-to-change-onclick-event-with-jquery/8188681 */
-    /* STAGE 3 show + STAGE 2 remove */
-    $(".sunlight-button-1").unbind("click");
-    $(".sunlight-button-1").click(function(){
-      eighthWater = true;
-      if (seventhWater){
-        $(".soil-ground").css({'background-color': '#402c26'});
-        $(".small-soil-nurture").css({'background-color': '#361e16'});
-        $(".stage-2").remove();
-        $(".stage-3").show();
-      }
-    });
-  });
-  /*lighten soil if left alone after sunlight */
-  $(".leave-button-1").click(function(){
-    thirdWater = true;
-    if (secondWater){
-      $(".soil-ground").css({'background-color': '#402c26'});
-      $(".small-soil-nurture").css({'background-color': '#361e17'});
-    }
-    /* Change function of leave-button-1 @https://stackoverflow.com/questions/4506219/how-to-change-onclick-event-with-jquery/8188681 */
-    $(".leave-button-1").unbind("click");
-    $(".leave-button-1").click(function(){
-      fifthWater = true;
-      if (fourthWater){
-        $(".soil-ground").css({'background-color': '#30211d'});
-        $(".small-soil-nurture").css({'background-color': '#24140f'});
-      }
-      /* Change function of leave-button-1 */
-      /* STAGE 2 show + STAGE 1 remove */
-      $(".leave-button-1").unbind("click");
-      $(".leave-button-1").click(function(){
-        sixthWater = true;
-        if (fifthWater){
-          $(".soil-ground").css({'background-color': '#402c26'});
-          $(".small-soil-nurture").css({'background-color': '#361e17'});
-          $(".stage-1").remove();
-          $(".stage-2").show();
-        }
-        /* Change function of leave-button-1 */
-        $(".leave-button-1").unbind("click");
-        $(".leave-button-1").click(function(){
-          ninthWater = true;
-          if (eighthWater){
-            $(".soil-ground").css({'background-color': '#503730'});
-            $(".small-soil-nurture").css({'background-color': '#47281f'});
-          }
-          /* Change function of leave-button-1 */
-          /* STAGE 5 show + STAGE 4 remove */
-          $(".leave-button-1").unbind("click");
-          $(".leave-button-1").click(function(){
-            eleventhWater = true;
-            if (tenthWater){
-              $(".soil-ground").css({'background-color': '#402c26'});
-              $(".small-soil-nurture").css({'background-color': '#361e16'});
-              $(".stage-4").remove();
-              $(".stage-5").show();
-            }
-            /* Change function of leave-button-1 */
-            $(".leave-button-1").unbind("click");
-            $(".leave-button-1").click(function(){
-              twelevthWater = true;
-              if (eleventhWater){
-                $(".soil-ground").css({'background-color': '#503730'});
-                $(".small-soil-nurture").css({'background-color': '#48281e'});
-              }
-              /* Change function of leave-button-1 */
-              $(".leave-button-1").unbind("click");
-              $(".leave-button-1").click(function(){
-                fourteenthWater = true;
-                if (thirteenthWater){
-                  $(".soil-ground").css({'background-color': '#402c26'});
-                  $(".small-soil-nurture").css({'background-color': '#361e16'});
-                }
-                /* Change function of leave-button-1 */
-                /* STAGE 7 show + STAGE 6 remove */
-                $(".leave-button-1").unbind("click");
-                $(".leave-button-1").click(function(){
-                  fifteenthWater = true;
-                  if (fourteenthWater){
-                    $(".soil-ground").css({'background-color': '#503730'});
-                    $(".small-soil-nurture").css({'background-color': '#48281e'});
-                    $(".stage-6").remove();
-                    $(".stage-7").show();
-                  }
-                  /* Change function of leave-button-1 */
-                  /* STAGE 8 show + STAGE 7 remove */
-                  $(".leave-button-1").unbind("click");
-                  $(".leave-button-1").click(function(){
-                    seventeenthWater = true;
-                    if (sixteenthWater){
-                      $(".soil-ground").css({'background-color': '#503730'});
-                      $(".small-soil-nurture").css({'background-color': '#48281e'});
-                      $(".stage-7").remove();
-                      $(".stage-8").show();
-                    }
-                    /* Change function of leave-button-1 */
-                    /* STAGE 9 show + STAGE 8 remove */
-                    $(".leave-button-1").unbind("click");
-                    $(".leave-button-1").click(function(){
-                      ninteenthWater = true;
-                      if (eighteenthWater){
-                        $(".soil-ground").css({'background-color': '#503730'});
-                        $(".small-soil-nurture").css({'background-color': '#48281e'});
-                        $(".stage-8").remove();
-                        $(".stage-9").show();
-                      }
-                      /* Change function of leave-button-1 */
-                      /* STAGE 10 show + STAGE 9 remove */
-                      $(".leave-button-1").unbind("click");
-                      $(".leave-button-1").click(function(){
-                        twentyfirstWater = true;
-                        if (twentiethWater){
-                          $(".soil-ground").css({'background-color': '#604239'});
-                          $(".small-soil-nurture").css({'background-color': '#5a3226'});
-                          $(".stage-9").remove();
-                          $(".stage-10").show();
-                        }
-                        /* Change function of leave-button-1 */
-                        /* STAGE 11 show + STAGE 10 remove */
-                        $(".leave-button-1").unbind("click");
-                        $(".leave-button-1").click(function(){
-                          twentythirdWater = true;
-                          if (twentysecondWater){
-                            $(".soil-ground").css({'background-color': '#604239'});
-                            $(".small-soil-nurture").css({'background-color': '#5a3226'});
-                            $(".stage-10").remove();
-                            $(".stage-11").show();
-                          }
-                          /* Change function of leave-button-1 */
-                          /* STAGE 12 show + STAGE 11 remove */
-                          $(".leave-button-1").unbind("click");
-                          $(".leave-button-1").click(function(){
-                            twentyfifthWater = true;
-                            if (twentyfourthWater){
-                              $(".soil-ground").css({'background-color': '#604239'});
-                              $(".small-soil-nurture").css({'background-color': '#5a3226'});
-                              $(".stage-11").remove();
-                              $(".stage-12").show();
-                            }
-                          });
-                        });
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
-  });
+    /* remove(); to prevent stage 9 from showing again after */
+    $(".stage-10").remove();
+    $(".stage-11").show();
+  }
+});
 });
