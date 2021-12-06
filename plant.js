@@ -32,7 +32,8 @@ $(document).ready(function(){
 
 /* Simpler solution (Arrays) by Professor Ali Qadeer */
 /* OUTCOME 1 */
-const nurtureSequence1 = ["plant","water","sunlight","leave","leave","water"]
+const nurtureSequence1 = ["plant","water","sunlight","leave","leave","water",
+"sunlight","leave","leave","leave","water","leave","water","leave"]
 
 let clickNumber = 0;
 
@@ -66,7 +67,7 @@ $(function(){
         $(".small-soil-nurture").css({'background-color': '#100b0a'});
       });
 
-/* ".sunlight-button" lightens the soil by 2 */
+
       /* Watered before Sunlight */
       $(".sunlight-button").click(function(){
         sunlightOne = true;
@@ -94,7 +95,6 @@ $(function(){
       });
 
 
-/* ".leave-button" lightens the soil by 1 */
       /* Leave right after Water */
       $(".leave-button").click(function(){
         leaveOne = true;
@@ -138,6 +138,13 @@ $(function(){
                     $(".soil-ground").css({'background-color': '#80584d'});
                     $(".small-soil-nurture").css({'background-color': '#6d4d46'});
                   }
+        /* Leave right after Sunlight Once */
+                  $(".leave-button").click(function(){
+                    if (sunlightOne){
+                      $(".soil-ground").css({'background-color': 'red'});
+                      $(".small-soil-nurture").css({'background-color': '#3f2b27'});
+                    }
+                  });
                 });
               });
             });
@@ -150,14 +157,14 @@ $(function(){
     } else {
       console.log("false!")
 /* Things appear below here if "false" */
-
-
-
+/* Corpse Flower Root Rot if false */
+      $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
+      $(".stage-1").remove();
     }
 /* Remove buttons after reaching end of sequence */
-/*    if (clickNumber == nurtureSequence1.length){
+    if (clickNumber == nurtureSequence1.length){
       $("button").hide();
-    }*/
+    }
       clickNumber = clickNumber+1;
   })
 })
