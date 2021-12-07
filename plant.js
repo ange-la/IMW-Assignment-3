@@ -51,8 +51,8 @@ let clickNumber = 0;
 
 
 /*Change colour of soil depending what button was clicked first*/
-var water;
-var sunlight;
+var water = true;
+var sunlight = true;
 var sunlightOne;
 var sunlightTwo;
 var sunlightThree;
@@ -73,100 +73,51 @@ $(function(){
 /* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
 /* @ https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery */
 
+/* addEventListener @ https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener */
+/* multiple events with one button for addEventListener @ https://stackoverflow.com/questions/34559238/make-an-onclick-event-react-different-when-click-second-time */
 /* WATER */
 /* Dark soil when watered once */
-/* FIRST WATER > before every other button is clicked */
-    $(".water-button").click(function(){
-      $(".soil-ground").css({'background-color': '#201613'});
-      $(".small-soil-nurture").css({'background-color': '#100b0a'});
-      water = true;
-/*      if (sunlightOne){
+    document.getElementById("water-button").addEventListener("click",function(){
+      if (water) {
         $(".soil-ground").css({'background-color': '#201613'});
         $(".small-soil-nurture").css({'background-color': '#100b0a'});
-      } */
+        water = false;
+        //if watered right after watering once
+      } else {
+        $(".soil-ground").css({'background-color': '#100b0a'});
+        $(".small-soil-nurture").css({'background-color': '#000000'});
+        water = true;
+      }
     });
-
-
 
 /* SUNLIGHT */
-/* Soil lightens by 2 with Sunlight */
-/* FIRST SUNLIGHT > before every other button is clicked */
-    $(".sunlight-button").click(function(){
-      sunlight = true;
-      $(".soil-ground").css({'background-color': '#30211d'});
-      $(".small-soil-nurture").css({'background-color': '#1f1614'});
-/* Lighten soil if right after first water */
-      if (water || sunlight || leave){
-        $(".sunlight-button").click(function(){
-          sunlightOne = true;
-          $(".soil-ground").css({'background-color': '#402c26'});
-          $(".small-soil-nurture").css({'background-color': '#2f201d'});
-        });
-      }
-      if (sunlightOne || leaveOne){
-        $(".sunlight-button").click(function(){
-          sunlightTwo = true;
-          $(".soil-ground").css({'background-color': '#604239'});
-          $(".small-soil-nurture").css({'background-color': '#4e3631'});
-        });
-      }
-/* MAX SOIL LIGHTNESS */
-      if (sunlightTwo || leaveTwo || leaveFour){
-        $(".sunlight-button").click(function(){
-          sunlightThree = true;
-          $(".soil-ground").css({'background-color': '#80584d'});
-          $(".small-soil-nurture").css({'background-color': '#6e4c45'});
-        });
+/* Soil lightens by 2 */
+    document.getElementById("sunlight-button").addEventListener("click",function(){
+      if (sunlight){
+        $(".soil-ground").css({'background-color': '#402c26'});
+        $(".small-soil-nurture").css({'background-color': '#30211d'});
+        sunlight = false;
+      } else {
+        $(".soil-ground").css({'background-color': '#604239'});
+        $(".small-soil-nurture").css({'background-color': '#402c26'});
+        sunlight = true;
       }
     });
-
 
 /* LEAVE */
-/* Soil lightens by 1 with Sunlight */
-/* FIRST LEAVE > before every other button is clicked */
-    $(".leave-button").click(function(){
-      firstLeave = true;
-      $(".soil-ground").css({'background-color': '#30211d'});
-      $(".small-soil-nurture").css({'background-color': '#1f1614'});
-/* Lighten soil if right after first water */
-      if (water){
-        $(".leave-button").click(function(){
-          leave = true;
-          $(".soil-ground").css({'background-color': '#30211d'});
-          $(".small-soil-nurture").css({'background-color': '#1f1614'});
-        });
-      }
-/* Leave right after Sunlight clicked Once */
-      if (sunlight){
-        $(".leave-button").click(function(){
-          leaveOne = true;
-          $(".soil-ground").css({'background-color': '#402c26'});
-          $(".small-soil-nurture").css({'background-color': '#2f211e'});
-        });
-      }
-      if (sunlightOne){
-        $(".leave-button").click(function(){
-          leaveTwo = true;
-          $(".soil-ground").css({'background-color': '#503730'});
-          $(".small-soil-nurture").css({'background-color': '#402c26'});
-        });
-      }
-      if (sunlightTwo){
-        $(".leave-button").click(function(){
-          leaveThree = true;
-          $(".soil-ground").css({'background-color': '#704d43'});
-          $(".small-soil-nurture").css({'background-color': '#5e413b'});
-        });
-      }
-/* Soil colour is the same from sunlightThree because of MAX SOIL LIGHTNESS */
-      if (sunlightThree){
-        $(".leave-button").click(function(){
-          leaveFour = true;
-          $(".soil-ground").css({'background-color': '#80584d'});
-          $(".small-soil-nurture").css({'background-color': '#6e4c45'});
-        });
+/* Soil lightens by 1 */
+    document.getElementById("leave-button").addEventListener("click",function(){
+      if (leave){
+        $(".soil-ground").css({'background-color': '#30211d'});
+        $(".small-soil-nurture").css({'background-color': '#1f1614'});
+        leave = false;
+      } else {
+        $(".soil-ground").css({'background-color': '#402c26'});
+        $(".small-soil-nurture").css({'background-color': '#2f211e'});
+        leave = true;
       }
     });
+
 
 
 /* Things appear below here if "true" */
