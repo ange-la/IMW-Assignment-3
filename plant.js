@@ -40,94 +40,172 @@ $(document).ready(function(){
 
 /* Simpler solution (Arrays) by Professor Ali Qadeer */
 /* TRUE SEQUENCES */
-const nurtureSequence1 = ["plant","water","sunlight","leave","leave","water",
-"sunlight","leave","leave","leave","water","leave","water","leave"];
+const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
+"water","sunlight","leave","leave","leave","water","sunlight","leave"];
+
+/*
 const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
-"water","leave","leave","leave","water","sunlight","leave","leave"];
+"sunlight","water","leave","leave","leave","sunlight","water"]; */
 
-/* FALSE SEQUENCES ROOT ROT*/
-const falseSequence1 = ["plant","water","water","water","water","water","water",
-"water","water","water","water","water","water","water"];
-const falseSequence2 = ["plant","leave","leave","leave","water","leave","water",
-"leave","water","leave","water","leave","water","leave"];
-
-/* FALSE SEQUENCES UNDERWATERED */
-const falseSequence3 = ["plant","sunlight","leave","water","leave","sunlight","leave",
-"sunlight","leave","leave","leave","water","sunlight","leave"]
 
 let clickNumber = 0;
+
+
+/*Change colour of soil depending what button was clicked first*/
+var water;
+var sunlight;
+var sunlightOne;
+var sunlightTwo;
+var sunlightThree;
+var leave;
+var leaveOne;
+var leaveTwo;
+var leaveThree;
+var leaveFour;
+
 
 $(function(){
   $("button").click(function(){
     let buttonClicked = $(this).attr("class").replace("-button","")
-    if (buttonClicked == nurtureSequence2[clickNumber]){
-      console.log("TRUE-1")
-      $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
-    } else if (buttonClicked == nurtureSequence1[clickNumber]){
-      console.log("TRUE-2")
-      $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
-/* Things appear below here if "true" */
 
-/* Trigger event after 2 buttons clicked in order */
-/* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
-/* WATER button darkens the soil */
-/* @ https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery */
 
 /* COLOUR OF THE SOIL */
-/* ".water-button" darkens the soil */
+/* Trigger event after 2 buttons clicked in order */
+/* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
+/* @ https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery */
+
+/* WATER */
+/* Dark soil when watered once */
+/* FIRST WATER > before every other button is clicked */
+    $(".water-button").click(function(){
+      $(".soil-ground").css({'background-color': '#201613'});
+      $(".small-soil-nurture").css({'background-color': '#100b0a'});
+      water = true;
+      if (sunlightOne){
+        $(".soil-ground").css({'background-color': '#201613'});
+        $(".small-soil-nurture").css({'background-color': '#100b0a'});
+      }
+    });
+
+/* SUNLIGHT */
+/* Soil lightens by 2 with Sunlight */
+/* FIRST SUNLIGHT > before every other button is clicked */
+    $(".sunlight-button").click(function(){
+      sunlight = true;
+      $(".soil-ground").css({'background-color': '#30211d'});
+      $(".small-soil-nurture").css({'background-color': '#1f1614'});
+/* Lighten soil if right after first water */
+  //    $(".sunlight-button").unbind();
+      $(".sunlight-button").click(function(){
+        if (water || sunlight || leave){
+          sunlightOne = true;
+          $(".soil-ground").css({'background-color': '#402c26'});
+          $(".small-soil-nurture").css({'background-color': '#2f201d'});
+        }
+  //      $(".sunlight-button").unbind();
+        $(".sunlight-button").click(function(){
+          if (sunlightOne || leaveOne){
+          sunlightTwo = true;
+            $(".soil-ground").css({'background-color': '#604239'});
+            $(".small-soil-nurture").css({'background-color': '#4e3631'});
+          }
+/* MAX SOIL LIGHTNESS */
+  //        $(".sunlight-button").unbind();
+          $(".sunlight-button").click(function(){
+            if (sunlightTwo || leaveTwo || leaveFour){
+              sunlightThree = true;
+              $(".soil-ground").css({'background-color': '#80584d'});
+              $(".small-soil-nurture").css({'background-color': '#6e4c45'});
+            }
+          });
+        });
+      });
+    });
 
 
+/* LEAVE */
+/* Soil lightens by 1 with Sunlight */
+/* FIRST LEAVE > before every other button is clicked */
+    $(".leave-button").click(function(){
+      firstLeave = true;
+      $(".soil-ground").css({'background-color': '#30211d'});
+      $(".small-soil-nurture").css({'background-color': '#1f1614'});
+/* Lighten soil if right after first water */
+//      $(".leave-button").unbind();
+      $(".leave-button").click(function(){
+        if (water){
+          leave = true;
+          $(".soil-ground").css({'background-color': '#30211d'});
+          $(".small-soil-nurture").css({'background-color': '#1f1614'});
+        }
+/* Leave right after Sunlight clicked Once */
+  //      $(".leave-button").unbind();
+        $(".leave-button").click(function(){
+          if (sunlight){
+            leaveOne = true;
+            $(".soil-ground").css({'background-color': '#402c26'});
+            $(".small-soil-nurture").css({'background-color': '#2f211e'});
+          }
+//          $(".leave-button").unbind();
+          $(".leave-button").click(function(){
+            if (sunlightOne){
+              leaveTwo = true;
+              $(".soil-ground").css({'background-color': '#503730'});
+              $(".small-soil-nurture").css({'background-color': '#402c26'});
+            }
+  //          $(".leave-button").unbind();
+            $(".leave-button").click(function(){
+              if (sunlightTwo){
+                leaveThree = true;
+                $(".soil-ground").css({'background-color': '#704d43'});
+                $(".small-soil-nurture").css({'background-color': '#5e413b'});
+              }
+/* Soil colour is the same from sunlightThree because of MAX SOIL LIGHTNESS */
+    //          $(".leave-button").unbind();
+              $(".leave-button").click(function(){
+                if (sunlightThree){
+                  leaveFour = true;
+                  $(".soil-ground").css({'background-color': '#80584d'});
+                  $(".small-soil-nurture").css({'background-color': '#6e4c45'});
+                }
+              });
+            });
+          });
+        });
+      });
+    });
+
+
+/* Things appear below here if "true" */
+/* SEQUENCE 1 */
+    if (buttonClicked == nurtureSequence1[clickNumber]){
+      console.log("TRUE-1")
+      $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+/* SEQUENCE 2 */
+    } /*else if (buttonClicked == nurtureSequence2[clickNumber]){
+      console.log("TRUE-2")
+      $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+    } */
 
 /* Things appear below here if "false" */
 /* Corpse Flower Root Rot if false */
-    } else if (buttonClicked == falseSequence1[clickNumber]){
-      console.log("FALSE-1")
-      $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
-      $(".stage-1").remove();
-      $(".root-rot-1").show();
-    } else if (buttonClicked == falseSequence2[clickNumber]){
-      console.log("FALSE-2")
-      $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
-      $(".stage-1").remove();
-      $(".root-rot-1").show();
-/* Corpse Flower Underwatered if false */
-    } else if (buttonClicked == falseSequence3[clickNumber]){
-      console.log("FALSE-3")
-      $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
-      $(".stage-1").remove();
-      $(".underwatered-1").show();
-    }
+
+
 /* Remove buttons after reaching end of sequence */
+/* Change description after reaching end of sequence based on outcome */
     if (clickNumber == nurtureSequence1.length){
       $("button").hide();
       $(".nurture-text").remove();
       $(".true-text").show();
       $(".false-text").remove();
-    }
+    } /*
     if (clickNumber == nurtureSequence2.length){
       $("button").hide();
       $(".nurture-text").remove();
       $(".true-text").show();
       $(".false-text").remove();
-    }
-    if (clickNumber == falseSequence1.length){
-      $("button").hide();
-      $(".true-text").remove();
-      $(".nurture-text").remove();
-      $(".false-text").show();
-    }
-    if (clickNumber == falseSequence2.length){
-      $("button").hide();
-      $(".true-text").remove();
-      $(".nurture-text").remove();
-      $(".false-text").show();
-    }
-    if (clickNumber == falseSequence3.length){
-      $("button").hide();
-      $(".nurture-text").remove();
-      $(".true-text").remove();
-      $(".underwatered-text").show();
-    }
+    } */
+
       clickNumber = clickNumber+1;
   })
 })

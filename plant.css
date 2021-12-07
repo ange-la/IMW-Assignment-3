@@ -75,6 +75,7 @@ h1 {
   margin-top: 60px;
   margin-bottom: 560px;
 }
+/* FALSE OUTCOME TEXT */
 .false-text {
   color: #ffffff;
   font-size: 20px;
@@ -103,6 +104,35 @@ h1 {
   margin-bottom: 560px;
   display: none;
 }
+.sunlight-text {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: 'abril_fatfaceregular';
+  letter-spacing: 2px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  margin-top: 30px;
+  margin-bottom: 560px;
+  display: none;
+}
+.fail-germinate-text {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: 'abril_fatfaceregular';
+  letter-spacing: 2px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  margin-top: 30px;
+  margin-bottom: 560px;
+  display: none;
+}
+/* TRUE OUTCOME TEXT */
 .true-text{
   color: #ffffff;
   font-size: 20px;
