@@ -42,7 +42,6 @@ $(document).ready(function(){
 /* TRUE SEQUENCES */
 const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
 "water","sunlight","leave","leave","leave","water","sunlight","leave"];
-
 /*
 const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
 "sunlight","water","leave","leave","leave","sunlight","water"]; */
@@ -81,11 +80,13 @@ $(function(){
       $(".soil-ground").css({'background-color': '#201613'});
       $(".small-soil-nurture").css({'background-color': '#100b0a'});
       water = true;
-      if (sunlightOne){
+/*      if (sunlightOne){
         $(".soil-ground").css({'background-color': '#201613'});
         $(".small-soil-nurture").css({'background-color': '#100b0a'});
-      }
+      } */
     });
+
+
 
 /* SUNLIGHT */
 /* Soil lightens by 2 with Sunlight */
@@ -95,31 +96,28 @@ $(function(){
       $(".soil-ground").css({'background-color': '#30211d'});
       $(".small-soil-nurture").css({'background-color': '#1f1614'});
 /* Lighten soil if right after first water */
-  //    $(".sunlight-button").unbind();
-      $(".sunlight-button").click(function(){
-        if (water || sunlight || leave){
+      if (water || sunlight || leave){
+        $(".sunlight-button").click(function(){
           sunlightOne = true;
           $(".soil-ground").css({'background-color': '#402c26'});
           $(".small-soil-nurture").css({'background-color': '#2f201d'});
-        }
-  //      $(".sunlight-button").unbind();
-        $(".sunlight-button").click(function(){
-          if (sunlightOne || leaveOne){
-          sunlightTwo = true;
-            $(".soil-ground").css({'background-color': '#604239'});
-            $(".small-soil-nurture").css({'background-color': '#4e3631'});
-          }
-/* MAX SOIL LIGHTNESS */
-  //        $(".sunlight-button").unbind();
-          $(".sunlight-button").click(function(){
-            if (sunlightTwo || leaveTwo || leaveFour){
-              sunlightThree = true;
-              $(".soil-ground").css({'background-color': '#80584d'});
-              $(".small-soil-nurture").css({'background-color': '#6e4c45'});
-            }
-          });
         });
-      });
+      }
+      if (sunlightOne || leaveOne){
+        $(".sunlight-button").click(function(){
+          sunlightTwo = true;
+          $(".soil-ground").css({'background-color': '#604239'});
+          $(".small-soil-nurture").css({'background-color': '#4e3631'});
+        });
+      }
+/* MAX SOIL LIGHTNESS */
+      if (sunlightTwo || leaveTwo || leaveFour){
+        $(".sunlight-button").click(function(){
+          sunlightThree = true;
+          $(".soil-ground").css({'background-color': '#80584d'});
+          $(".small-soil-nurture").css({'background-color': '#6e4c45'});
+        });
+      }
     });
 
 
@@ -131,48 +129,43 @@ $(function(){
       $(".soil-ground").css({'background-color': '#30211d'});
       $(".small-soil-nurture").css({'background-color': '#1f1614'});
 /* Lighten soil if right after first water */
-//      $(".leave-button").unbind();
-      $(".leave-button").click(function(){
-        if (water){
+      if (water){
+        $(".leave-button").click(function(){
           leave = true;
           $(".soil-ground").css({'background-color': '#30211d'});
           $(".small-soil-nurture").css({'background-color': '#1f1614'});
-        }
-/* Leave right after Sunlight clicked Once */
-  //      $(".leave-button").unbind();
-        $(".leave-button").click(function(){
-          if (sunlight){
-            leaveOne = true;
-            $(".soil-ground").css({'background-color': '#402c26'});
-            $(".small-soil-nurture").css({'background-color': '#2f211e'});
-          }
-//          $(".leave-button").unbind();
-          $(".leave-button").click(function(){
-            if (sunlightOne){
-              leaveTwo = true;
-              $(".soil-ground").css({'background-color': '#503730'});
-              $(".small-soil-nurture").css({'background-color': '#402c26'});
-            }
-  //          $(".leave-button").unbind();
-            $(".leave-button").click(function(){
-              if (sunlightTwo){
-                leaveThree = true;
-                $(".soil-ground").css({'background-color': '#704d43'});
-                $(".small-soil-nurture").css({'background-color': '#5e413b'});
-              }
-/* Soil colour is the same from sunlightThree because of MAX SOIL LIGHTNESS */
-    //          $(".leave-button").unbind();
-              $(".leave-button").click(function(){
-                if (sunlightThree){
-                  leaveFour = true;
-                  $(".soil-ground").css({'background-color': '#80584d'});
-                  $(".small-soil-nurture").css({'background-color': '#6e4c45'});
-                }
-              });
-            });
-          });
         });
-      });
+      }
+/* Leave right after Sunlight clicked Once */
+      if (sunlight){
+        $(".leave-button").click(function(){
+          leaveOne = true;
+          $(".soil-ground").css({'background-color': '#402c26'});
+          $(".small-soil-nurture").css({'background-color': '#2f211e'});
+        });
+      }
+      if (sunlightOne){
+        $(".leave-button").click(function(){
+          leaveTwo = true;
+          $(".soil-ground").css({'background-color': '#503730'});
+          $(".small-soil-nurture").css({'background-color': '#402c26'});
+        });
+      }
+      if (sunlightTwo){
+        $(".leave-button").click(function(){
+          leaveThree = true;
+          $(".soil-ground").css({'background-color': '#704d43'});
+          $(".small-soil-nurture").css({'background-color': '#5e413b'});
+        });
+      }
+/* Soil colour is the same from sunlightThree because of MAX SOIL LIGHTNESS */
+      if (sunlightThree){
+        $(".leave-button").click(function(){
+          leaveFour = true;
+          $(".soil-ground").css({'background-color': '#80584d'});
+          $(".small-soil-nurture").css({'background-color': '#6e4c45'});
+        });
+      }
     });
 
 
