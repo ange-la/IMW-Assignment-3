@@ -42,10 +42,9 @@ $(document).ready(function(){
 /* TRUE SEQUENCES */
 const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
 "water","sunlight","leave","leave","leave","water","sunlight","leave"];
-/*
-const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
-"sunlight","water","leave","leave","leave","sunlight","water"]; */
 
+const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
+"sunlight","water","leave","leave","leave","sunlight","water"];
 
 let clickNumber = 0;
 
@@ -53,14 +52,7 @@ let clickNumber = 0;
 /*Change colour of soil depending what button was clicked first*/
 var water = true;
 var sunlight = true;
-var sunlightOne;
-var sunlightTwo;
-var sunlightThree;
-var leave;
-var leaveOne;
-var leaveTwo;
-var leaveThree;
-var leaveFour;
+var leave = true;
 
 
 $(function(){
@@ -82,11 +74,6 @@ $(function(){
         $(".soil-ground").css({'background-color': '#201613'});
         $(".small-soil-nurture").css({'background-color': '#100b0a'});
         water = false;
-        //if watered right after watering once
-      } else {
-        $(".soil-ground").css({'background-color': '#100b0a'});
-        $(".small-soil-nurture").css({'background-color': '#000000'});
-        water = true;
       }
     });
 
@@ -126,13 +113,39 @@ $(function(){
       console.log("TRUE-1")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
 /* SEQUENCE 2 */
-    } /*else if (buttonClicked == nurtureSequence2[clickNumber]){
+    } else if (buttonClicked == nurtureSequence2[clickNumber]){
       console.log("TRUE-2")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
-    } */
+    }
+
+
+
+
 
 /* Things appear below here if "false" */
 /* Corpse Flower Root Rot if false */
+    document.getElementById("water-button").addEventListener("click",function(){
+      /* double click event @ https://api.jquery.com/dblclick/ */
+      $(".water-button").dblclick(function(){
+        $(".soil-ground").css({'background-color': '#100b0a'});
+        $(".small-soil-nurture").css({'background-color': '#000000'});
+        water = true;
+        console.log("OVERWATERED!")
+        $(".stage-1").remove();
+        $(".nurture-text").remove();
+        $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
+        $(".root-rot-1").show();
+        $(".false-text").show();
+      });
+    });
+
+
+
+
+
+/* Corpse Flower Underwatered */
+
+
 
 
 /* Remove buttons after reaching end of sequence */
@@ -142,13 +155,13 @@ $(function(){
       $(".nurture-text").remove();
       $(".true-text").show();
       $(".false-text").remove();
-    } /*
+    }
     if (clickNumber == nurtureSequence2.length){
       $("button").hide();
       $(".nurture-text").remove();
       $(".true-text").show();
       $(".false-text").remove();
-    } */
+    }
 
       clickNumber = clickNumber+1;
   })

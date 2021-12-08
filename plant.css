@@ -44,6 +44,22 @@ h2 {
 .leave-button {
   display: none;
 }
+/* WHAT IS THAT STENCH? buttons */
+.insecticide-button {
+  display: none;
+}
+.prune-button {
+  display: none;
+}
+.harvest-button {
+  display: none;
+}
+.leave-button-2 {
+  display: none;
+}
+.water-button-2 {
+  display: none;
+}
 
 
 
