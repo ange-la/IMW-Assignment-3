@@ -15,6 +15,9 @@ $(document).ready(function(){
     $(".nurture-flower").hide();
     $(".remove-stench").hide();
     $(".full-remove").show();
+    $(".insecticide-button").show();
+    $(".prune-button").show();
+    $(".leave-button-2").show();
   });
 /* FIRST BUTTON = "PLANT SEED" then shows the other buttons */
   $(".plant-button").click(function(){
@@ -44,7 +47,10 @@ const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
 "water","sunlight","leave","leave","leave","water","sunlight","leave"];
 
 const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
-"sunlight","water","leave","leave","leave","sunlight","water"];
+"sunlight","water","leave","leave","leave","sunlight","leave"];
+
+const rottedSequence = ["plant","water","water","water","water","water","water"
+,"water","water","water","water","water","water","water"];
 
 let clickNumber = 0;
 
@@ -116,26 +122,54 @@ $(function(){
     } else if (buttonClicked == nurtureSequence2[clickNumber]){
       console.log("TRUE-2")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+/* Things appear below here if "false" */
+    } else if (buttonClicked == rottedSequence[clickNumber]){
+      console.log("OVERWATERED!")
+      $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
+    } else {
+/* Corpse Flower Underwatered / Neglected */
+      console.log("FALSE!")
+      $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+      $(".nurture-text").remove();
+      $(".true-text").remove();
     }
 
-
-
-
-
-/* Things appear below here if "false" */
+/* DOUBLE CLICK water twice in a row */
 /* Corpse Flower Root Rot if false */
     document.getElementById("water-button").addEventListener("click",function(){
-      /* double click event @ https://api.jquery.com/dblclick/ */
+/* double click event @ https://api.jquery.com/dblclick/ */
       $(".water-button").dblclick(function(){
         $(".soil-ground").css({'background-color': '#100b0a'});
         $(".small-soil-nurture").css({'background-color': '#000000'});
         water = true;
-        console.log("OVERWATERED!")
         $(".stage-1").remove();
         $(".nurture-text").remove();
         $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
         $(".root-rot-1").show();
         $(".false-text").show();
+        $(".sunlight-text").remove();
+        $(".true-text").remove();
+      });
+    });
+/* ^^^^ FALSE TEXT IS NOT SHOWING UP AT THE END */
+
+
+
+
+/* DOUBLE CLICK sunlight twice in a row */
+/* Corpse Flower Underwatered */
+    document.getElementById("sunlight-button").addEventListener("click",function(){
+/* double click event @ https://api.jquery.com/dblclick/ */
+      $(".sunlight-button").dblclick(function(){
+        $(".soil-ground").css({'background-color': '#604239'});
+        $(".small-soil-nurture").css({'background-color': '#402c26'});
+        sunlight = true;
+        $(".stage-1").remove();
+        $(".nurture-text").remove();
+        $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+        $(".underwatered-1").show();
+        $(".root-rot-1").remove();
+        $(".sunlight-text").show();
       });
     });
 
@@ -143,7 +177,6 @@ $(function(){
 
 
 
-/* Corpse Flower Underwatered */
 
 
 
@@ -154,15 +187,41 @@ $(function(){
       $("button").hide();
       $(".nurture-text").remove();
       $(".true-text").show();
-      $(".false-text").remove();
+      $(".false-text").hide();
     }
     if (clickNumber == nurtureSequence2.length){
       $("button").hide();
       $(".nurture-text").remove();
       $(".true-text").show();
-      $(".false-text").remove();
+      $(".false-text").hide(); /* CHECK THIS */
+    }
+    if (clickNumber == rottedSequence.length){
+      $("button").hide();
+      $(".nurture-text").remove();
+      $(".true-text").remove();
+      $(".false-text").show();
     }
 
       clickNumber = clickNumber+1;
   })
 })
+
+
+
+
+
+/* WHAT IS THAT STENCH? */
+/*
+$(function(){
+  $("button").click(function(){
+    let buttonClicked = $(this).attr("class").replace("-button","")
+
+    if (buttonclicked == sequence1[clickNumber]){
+      console.log("")
+    }
+    if (clickNumber == sequence1.length){
+
+    }
+    clickNumber = clickNumber+1
+  });
+}); */

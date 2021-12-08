@@ -17,47 +17,41 @@ body {
 /* BUTTONS */
 button {
   background-color: #ffffff;
-  display: flex;
   font-size: 18px;
   font-family: sans-serif;
   padding-left: 10px;
   padding-right: 10px;
+  border: 2px solid #ffffff;
+}
+button:active {
+  background-color: #21512b;
 }
 h2 {
   color: #21512b;
   font-family: 'abril_fatfaceregular';
   font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+h2:active {
+  color: #ffffff;
 }
 .buttons {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
-  justify-content: space-evenly;
+  padding-top: 110px;
+  justify-content: space-around;
   display: flex;
+  position: relative;
+  top: 0px;
 }
-.water-button {
+.water-button, .sunlight-button, .leave-button {
   display: none;
 }
-.sunlight-button {
-  display: none;
-}
-.leave-button {
-  display: none;
-}
+
 /* WHAT IS THAT STENCH? buttons */
-.insecticide-button {
-  display: none;
-}
-.prune-button {
-  display: none;
-}
-.harvest-button {
-  display: none;
-}
-.leave-button-2 {
-  display: none;
-}
-.water-button-2 {
+.insecticide-button, .prune-button, .leave-button-2,
+.harvest-button, .water-button-2 {
   display: none;
 }
 
@@ -88,7 +82,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
-  margin-top: 60px;
+  margin-top: 30px;
   margin-bottom: 560px;
 }
 /* FALSE OUTCOME TEXT */
