@@ -47,10 +47,15 @@ const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
 "water","sunlight","leave","leave","leave","water","sunlight","leave"];
 
 const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
-"sunlight","water","leave","leave","leave","sunlight","leave"];
+"sunlight","water","leave","leave","leave","sunlight","water"];
 
+const nurtureSequence3 = ["plant","leave","sunlight","water","leave","leave",
+"leave","sunlight","water","leave","leave","leave","sunlight","water"];
+/*
 const rottedSequence = ["plant","water","water","water","water","water","water"
 ,"water","water","water","water","water","water","water"];
+
+const leaveSequence = ["plant","leave","leave","leave","leave"];*/
 
 let clickNumber = 0;
 
@@ -123,15 +128,21 @@ $(function(){
       console.log("TRUE-2")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
 /* Things appear below here if "false" */
-    } else if (buttonClicked == rottedSequence[clickNumber]){
+    } else if (buttonClicked == nurtureSequence3[clickNumber]){
+      console.log("TRUE-3")
+      $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+    }/* else if (buttonClicked == rottedSequence[clickNumber]){
       console.log("OVERWATERED!")
       $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
-    } else {
+    }*/ else {
 /* Corpse Flower Underwatered / Neglected */
       console.log("FALSE!")
-      $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
-      $(".nurture-text").remove();
-      $(".true-text").remove();
+  //    $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+  //    $(".underwatered-1").show();
+  //    $(".stage-1").hide();
+  //    $(".true-text").hide(); /* NEED TO KEEP THIS HERE or it will show up too */
+  //    $(".nurture-text").hide();
+  //    $(".underwatered-text").show();
     }
 
 /* DOUBLE CLICK water twice in a row */
@@ -139,22 +150,16 @@ $(function(){
     document.getElementById("water-button").addEventListener("click",function(){
 /* double click event @ https://api.jquery.com/dblclick/ */
       $(".water-button").dblclick(function(){
-        $(".soil-ground").css({'background-color': '#100b0a'});
-        $(".small-soil-nurture").css({'background-color': '#000000'});
         water = true;
-        $(".stage-1").remove();
-        $(".nurture-text").remove();
+        $(".stage-1").hide();
+        $(".nurture-text").hide();
         $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
         $(".root-rot-1").show();
+        $(".underwatered-text").hide();
         $(".false-text").show();
-        $(".sunlight-text").remove();
-        $(".true-text").remove();
+        $(".true-text").hide(); /* NEED TO KEEP THIS HERE or it will show up too */
       });
     });
-/* ^^^^ FALSE TEXT IS NOT SHOWING UP AT THE END */
-
-
-
 
 /* DOUBLE CLICK sunlight twice in a row */
 /* Corpse Flower Underwatered */
@@ -164,45 +169,40 @@ $(function(){
         $(".soil-ground").css({'background-color': '#604239'});
         $(".small-soil-nurture").css({'background-color': '#402c26'});
         sunlight = true;
-        $(".stage-1").remove();
-        $(".nurture-text").remove();
-        $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
-        $(".underwatered-1").show();
-        $(".root-rot-1").remove();
-        $(".sunlight-text").show();
+        if (sunlight){
+          $(".stage-1").hide();
+          $(".nurture-text").hide();
+          $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+          $(".underwatered-1").show();
+          $(".root-rot-1").hide();
+          $(".underwatered-text").show();
+        }
       });
     });
 
-
-
-
-
-
-
-
+/* HEALTHY > brought back from underwatering */
+    $(".water-button").click(function(){
+      if (sunlight){
+        water = true;
+        $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+        $(".stage-1").show();
+        $(".underwatered-1").hide();
+/* ROOT ROT > if watered right after watering */
+      } else if (water) {
+        $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
+        $(".root-rot-1").show();
+        $(".stage-1").remove();
+        $(".underwatered-1").remove();
+        $(".true-text").remove();
+      }
+    });
 
 /* Remove buttons after reaching end of sequence */
-/* Change description after reaching end of sequence based on outcome */
-    if (clickNumber == nurtureSequence1.length){
+    if (clickNumber == 13){
       $("button").hide();
-      $(".nurture-text").remove();
-      $(".true-text").show();
-      $(".false-text").hide();
+      $(".nurture-text").hide();
     }
-    if (clickNumber == nurtureSequence2.length){
-      $("button").hide();
-      $(".nurture-text").remove();
-      $(".true-text").show();
-      $(".false-text").hide(); /* CHECK THIS */
-    }
-    if (clickNumber == rottedSequence.length){
-      $("button").hide();
-      $(".nurture-text").remove();
-      $(".true-text").remove();
-      $(".false-text").show();
-    }
-
-      clickNumber = clickNumber+1;
+    clickNumber = clickNumber+1;
   })
 })
 
