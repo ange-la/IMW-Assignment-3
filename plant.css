@@ -44,10 +44,7 @@ h2:active {
   position: relative;
   top: 0px;
 }
-.water-button, .sunlight-button, .leave-button,
-.waterLeave-button, .sunlightLeave-button,
-.leaveSunlight-button, .moreSunlight-button,
-.secondLeave-button {
+.water-button, .sunlight-button, .leave-button {
   display: none;
 }
 
@@ -82,7 +79,7 @@ h1 {
   margin-bottom: 560px;
 }
 /* FALSE OUTCOME TEXT */
-.false-text {
+.rot-text {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';

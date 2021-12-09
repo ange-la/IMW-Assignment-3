@@ -4,20 +4,10 @@
 $(document).ready(function(){
   $(".nurture-flower").click(function(){
     $(".nurture-flower").hide();
-    $(".remove-stench").hide();
     $(".full-nurture").show();
     $(".stage-1").hide(); /* STAGE 1 HIDDEN HERE */
     $(".root-rot-1").hide(); /* FALSE Root Rot hidden here */
     $(".underwatered-1").hide(); /* FALSE Underwatered hidden here */
-  });
-/* CLICKED "REMOVE THE STENCH" option */
-  $(".remove-stench").click(function(){
-    $(".nurture-flower").hide();
-    $(".remove-stench").hide();
-    $(".full-remove").show();
-    $(".insecticide-button").show();
-    $(".prune-button").show();
-    $(".leave-button-2").show();
   });
 /* FIRST BUTTON = "PLANT SEED" then shows the other buttons */
   $(".plant-button").click(function(){
@@ -28,15 +18,17 @@ $(document).ready(function(){
     $(".small-soil-nurture").show();
   });
 /* STAGE 1 APPEARS HERE */
+/* STAGE 1 will not show up if "leave" is pressed before "water" and "sunlight" */
   $(".water-button").click(function(){
     $(".stage-1").show();
   });
   $(".sunlight-button").click(function(){
     $(".stage-1").show();
   });
-  $(".leave-button").click(function(){
-    $(".stage-1").show();
-  });
+
+/*  $(".leave-button").click(function(){
+    $(".stage-1").hide();
+  }); */
 });
 
 
@@ -52,14 +44,9 @@ const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
 const nurtureSequence3 = ["plant","leave","sunlight","water","leave","leave",
 "leave","sunlight","water","leave","leave","leave","sunlight","water"];
 
+var sunlight;
 
 let clickNumber = 0;
-
-
-/*Change colour of soil depending what button was clicked first*/
-var water = true;
-var sunlight = true;
-var leave = true;
 
 
 $(function(){
@@ -77,37 +64,20 @@ $(function(){
 /* WATER */
 /* Dark soil when watered once */
     document.getElementById("water-button").addEventListener("click",function(){
-      if (water) {
-        $(".soil-ground").css({'background-color': '#201613'});
-        $(".small-soil-nurture").css({'background-color': '#100b0a'});
-        water = true;
-      }
+      $(".soil-ground").css({'background-color': '#201613'});
+      $(".small-soil-nurture").css({'background-color': '#100b0a'});
     });
-
 /* SUNLIGHT */
-/* Soil lightens by 2 */
+/* Lighten soil when watered once (same as LEAVE) */
     document.getElementById("sunlight-button").addEventListener("click",function(){
-      if (water){
-        $(".soil-ground").css({'background-color': '#402c26'});
-        $(".small-soil-nurture").css({'background-color': '#30211d'});
-        sunlight = true;
-      } else if (sunlight){
-        $(".soil-ground").css({'background-color': '#604239'});
-        $(".small-soil-nurture").css({'background-color': '#402c26'});
-      }
+      $(".soil-ground").css({'background-color': '#402c26'});
+      $(".small-soil-nurture").css({'background-color': '#30211d'});
     });
-
 /* LEAVE */
-/* Soil lightens by 1 */
+/* Lighten soil when watered once (same as SUNLIGHT) */
     document.getElementById("leave-button").addEventListener("click",function(){
-      if (water){
-        $(".soil-ground").css({'background-color': '#30211d'});
-        $(".small-soil-nurture").css({'background-color': '#1f1614'});
-        leave = true;
-      } else if (leave){
-        $(".soil-ground").css({'background-color': '#402c26'});
-        $(".small-soil-nurture").css({'background-color': '#2f211e'});
-      }
+      $(".soil-ground").css({'background-color': '#402c26'});
+      $(".small-soil-nurture").css({'background-color': '#2f211e'});
     });
 
 
@@ -128,79 +98,50 @@ $(function(){
     } else {
 /* Corpse Flower Underwatered / Neglected */
       console.log("FALSE!")
+      $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+      $(".root-rot-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
     }
 
 /* DOUBLE CLICK water twice in a row */
 /* Corpse Flower Root Rot if false */
     document.getElementById("water-button").addEventListener("click",function(){
-/* double click event @ https://api.jquery.com/dblclick/ */
+      /* double click event @ https://api.jquery.com/dblclick/ */
       $(".water-button").dblclick(function(){
-        water = true;
-        $(".stage-1").remove();
-        $(".nurture-text").hide();
-        $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
-        $(".root-rot-1").show();
-        $(".underwatered-text").hide();
-        $(".false-text").show();
-        $(".true-text").hide(); /* NEED TO KEEP THIS HERE or it will show up too */
+      $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
+      $(".root-rot-1").show();
+      $(".stage-1").remove(); /* cannot be healthy anymore */
+      $(".underwatered-1").remove(); /* cannot be underwatered anymore */
+      /* TEXT */
+      $("nurture-text").hide();
+      $("rot-text").show();
       });
     });
 
 /* DOUBLE CLICK sunlight twice in a row */
 /* Corpse Flower Underwatered */
     document.getElementById("sunlight-button").addEventListener("click",function(){
-/* double click event @ https://api.jquery.com/dblclick/ */
+      /* double click event @ https://api.jquery.com/dblclick/ */
       $(".sunlight-button").dblclick(function(){
-        $(".soil-ground").css({'background-color': '#604239'});
-        $(".small-soil-nurture").css({'background-color': '#402c26'});
-        sunlight = false;
-        if (sunlight){
-          $(".stage-1").hide();
-          $(".nurture-text").hide();
-          $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
-          $(".underwatered-1").show();
-          $(".root-rot-1").hide();
-          $(".underwatered-text").show();
-        }
-      });
-    });
-
-/* LEAVE DOUBLE CLICK */
-    document.getElementById("leave-button").addEventListener("click",function(){
-      $(".leave-button").dblclick(function(){
-        $(".soil-ground").css({'background-color': '#30211d'});
-        $(".small-soil-nurture").css({'background-color': '#1f1614'});
-        leave = true;
-        if (leave){
-          $(".soil-ground").css({'background-color': '#604239'});
-          $(".small-soil-nurture").css({'background-color': '#402c26'});
-        }
+        $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+        $(".underwatered-1").show();
+        $(".root-rot-1").hide(); /* can still get root rot later */
+        $(".stage-1").hide(); /* can still become healthy later */
+        sunlight = true;
       });
     });
 
 /* HEALTHY > brought back from underwatering */
     $(".water-button").click(function(){
       if (sunlight){
-        water = true;
-        $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
         $(".stage-1").show();
-        $(".underwatered-1").hide();
-        $(".underwatered-text").hide();
-        $(".nurture-text").show();
-/* ROOT ROT > if watered right after watering */
-      } else if (water) {
-        $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
-        $(".root-rot-1").show();
-        $(".stage-1").remove();
-        $(".underwatered-1").remove();
-        $(".true-text").remove();
+        $(".underwatered-1").hide(); /* can still be underwatered later */
+        $("root-rot-1").hide(); /* can still get root rot later */
       }
     });
 
 /* Remove buttons after reaching end of sequence */
     if (clickNumber == 13){
       $("button").hide();
-      $(".nurture-text").hide();
     }
     clickNumber = clickNumber+1;
   })
