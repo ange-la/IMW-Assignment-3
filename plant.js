@@ -19,8 +19,12 @@ $(document).ready(function(){
     $(".insecticide-button").show();
     $(".prune-button").show();
     $(".leaveTwo-button").show();
+    $(".waterTwo-button").show();
     $(".harvest-button").hide();
-    $(".wither-1").show(); /* WITHER-1 will show up from the beginning */
+    $(".flies-1").show(); /* FLIES-1 will show up from the beginning */
+    $(".rotFlies-1").hide();
+    $(".rotNF-1").hide();
+    $(".wither-1").hide();
     $(".berry").hide();
     $(".seed").hide();
   });
@@ -61,7 +65,9 @@ const insecticideSequence = ["insecticide","insecticide","insecticide","insectic
 "insecticide","insecticide","insecticide","insecticide","insecticide","insecticide",
 "insecticide","harvest","plant"]
 const pruneSequence = ["prune","prune","prune","prune","prune","prune","prune",
-"prune","prune","prune","prune","prune","prune",];
+"prune","prune","prune","prune","prune","prune"];
+const waterSequence = ["waterTwo","waterTwo","waterTwo","waterTwo","waterTwo",
+"waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo"];
 
 /* Variables for the upcoming functions */
 var sunlight;
@@ -258,18 +264,30 @@ $(function(){
     });
 
 /*------------------------------------------------------------------------*/
+var rotFlies;
+var rotNF;
+
+/* waterTwo darkens the soil */
+/* Soil will not lighten with other buttons */
+    document.getElementById("waterTwo-button").addEventListener("click",function(){
+      $(".soil-ground").css({'background-color': '#201613'});
+      $(".small-soil-nurture").css({'background-color': '#100b0a'});
+    });
 
 /* WHAT IS THAT STENCH? */
 /* WITHER SEQUENCE 1 */
     if (buttonClicked == witherSequence[clickNumber]){
       console.log("LEAVE")
-      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".flies-1").attr("src","IMW-A3-Elements/flies-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
       $(".seed").attr("src","IMW-A3-Elements/seed.svg")
       if (clickNumber == 10){
         $(".leaveTwo-button").hide();
         $(".prune-button").hide();
         $(".insecticide-button").hide();
+        $(".waterTwo-button").hide();
         $(".remove-text").hide();
         $(".harvest-button").show();
         $(".harvest-text").show();
@@ -278,12 +296,15 @@ $(function(){
     } else if (buttonClicked == insecticideSequence[clickNumber]){
       console.log("insecticide")
       $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
       $(".seed").attr("src","IMW-A3-Elements/seed.svg")
       if (clickNumber == 10){
         $(".leaveTwo-button").hide();
         $(".prune-button").hide();
         $(".insecticide-button").hide();
+        $(".waterTwo-button").hide();
         $(".remove-text").hide();
         $(".harvest-button").show();
         $(".harvest-text").show();
@@ -292,36 +313,86 @@ $(function(){
     } else if (buttonClicked == pruneSequence[clickNumber]){
       console.log("prune")
       $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
+    } else if (buttonClicked == waterSequence[clickNumber]){
+      console.log("water")
+      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
     }
 
 /* PRUNING WILL REMOVE THE PLANT FASTER */
     $(".prune-button").click(function(){
-      if (clickNumber == 6){
+      if (clickNumber == 8){
         $("button").hide();
-        $(".wither-1").hide();
         $(".remove-text").hide();
         $(".harvest-button").show();
         $(".harvest-text").show();
       }
+      /* IF ROTTED no flies */
+      if (rotNF){
+        $(".wither-1").hide();
+        $(".rotFlies-1").hide();
+        $(".rotNF-1").show();
+      /* IF ROTTED with flies */
+      }
+      if (rotFlies){
+        $(".wither-1").hide();
+        $(".rotFlies-1").show();
+        $(".rotNF-1").hide();
+      }
     });
 
-/* INSECTICIDE REMOVES THE INSECT (small black specs in background) */
+/* INSECTICIDE REMOVES THE INSECT (small grey specs in background) */
     $(".insecticide-button").click(function(){
       $(".wither-1").show();
+      $(".flies-1").hide();
+      $(".rotNF-1").hide();
+      $(".rotFlies-1").hide()
       if (clickNumber == 10){
         $(".leaveTwo-button").hide();
         $(".prune-button").hide();
         $(".insecticide-button").hide();
+        $(".waterTwo-button").hide();
         $(".remove-text").hide();
         $(".harvest-button").show();
         $(".harvest-text").show();
       }
+      if (rotFlies){
+        rotNF = true;
+        $(".wither-1").hide();
+        $(".flies-1").hide();
+        $(".rotNF-1").show(); /* will stay rotted if .rotFlies-1 was activated */
+        $(".rotFlies-1").hide();
+        if (clickNumber == 10){
+          $(".leaveTwo-button").hide();
+          $(".prune-button").hide();
+          $(".insecticide-button").hide();
+          $(".waterTwo-button").hide();
+          $(".remove-text").hide();
+          $(".harvest-button").show();
+          $(".harvest-text").show();
+        }
+      }
+    });
+
+/* WATERING BRINGS BACK INSECTS while rotting (small grey specs in background) */
+/* Soil also darkens when watered */
+    $(".waterTwo-button").click(function(){
+      rotFlies = true;
+      $(".wither-1").hide();
+      $(".rotNF-1").hide();
+      $(".rotFlies-1").show(); /* WILL ALWAYS BE FLIES + ROT WHEN WATERED */
     });
 
 /* Harvest button will be replaced by plantTwo button */
     $(".harvest-button").click(function(){
       $(".harvest-button").hide();
       $(".wither-1").hide(); /* WITHER-1 is removed and only berry remains */
+      $(".flies-1").hide(); /* FLIES-1 is removed and only berry remains */
+      $(".rotFlies-1").hide();
+      $(".rotNF-1").hide();
       $(".small-soil").hide();
       $(".berry").show(); /* red BERRY appears */
     });

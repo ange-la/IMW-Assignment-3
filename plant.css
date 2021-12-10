@@ -39,7 +39,7 @@ button:active {
 }
 /* WHAT IS THAT STENCH? buttons */
 .insecticide-button, .prune-button, .leaveTwo-button,
-.harvest-button {
+.harvest-button, .waterTwo-button {
   display: none;
 }
 /* BUTTON TEXT */
@@ -87,7 +87,7 @@ h1 {
 }
 /* FALSE OUTCOME TEXT */
 /* OUTCOME TEXT */
-/* HARVEST TEXT */ 
+/* HARVEST TEXT */
 .rot-text, .underwatered-text, .true-text, .rot-result,
 .harvest-text {
   color: #ffffff;
@@ -216,6 +216,9 @@ img {
 /* .stage-1 > HEALTHY CORPSE FLOWER */
 /* .root-rot-1 > ROTTING CORPSE FLOWER */
 /* .underwatered-1 > UNDERWATERED CORPSE FLOWER */
-.stage-1, .root-rot-1, .underwatered-1 {
+/* .withered-1 > WITHERING CORPSE FLOWER */
+/* .flies-1 > CORPSE FLOWER WITHERING WITH FLIES */
+.stage-1, .root-rot-1, .underwatered-1, .wither-1,
+.flies-1, .rotFlies, .rotNF {
   display: block;
 }
