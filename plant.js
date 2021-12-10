@@ -45,9 +45,10 @@ const nurtureSequence3 = ["plant","leave","sunlight","water","leave","leave",
 "leave","sunlight","water","leave","leave","leave","sunlight","water"];
 
 var sunlight;
+var water;
+var rot;
 
 let clickNumber = 0;
-
 
 $(function(){
   $("button").click(function(){
@@ -98,22 +99,33 @@ $(function(){
     } else {
 /* Corpse Flower Underwatered / Neglected */
       console.log("FALSE!")
-      $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
-      $(".root-rot-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+      if (sunlight){
+        $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+      }
+      else if (water){
+        $(".root-rot-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
+      }
     }
 
 /* DOUBLE CLICK water twice in a row */
-/* Corpse Flower Root Rot if false */
+/* Corpse Flower Root Rot */
+/* CANNOT BE SAVED FROM ROOT ROT */
     document.getElementById("water-button").addEventListener("click",function(){
       /* double click event @ https://api.jquery.com/dblclick/ */
       $(".water-button").dblclick(function(){
+      rot = true;
       $(".root-rot-1").attr("src","IMW-A3-Elements/root-rot-"+clickNumber+".svg")
       $(".root-rot-1").show();
       $(".stage-1").remove(); /* cannot be healthy anymore */
       $(".underwatered-1").remove(); /* cannot be underwatered anymore */
       /* TEXT */
-      $("nurture-text").hide();
-      $("rot-text").show();
+      $(".rot-text").show();
+      $(".nurture-text").remove(); /* remove bc it can't happen anymore */
+      $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
+      /* ROOT ROT RESULT */
+      if (clickNumber == 13){
+        $(".rot-result").show();
+      }
       });
     });
 
@@ -122,12 +134,75 @@ $(function(){
     document.getElementById("sunlight-button").addEventListener("click",function(){
       /* double click event @ https://api.jquery.com/dblclick/ */
       $(".sunlight-button").dblclick(function(){
+        sunlight = true;
         $(".underwatered-1").attr("src","IMW-A3-Elements/underwatered-"+clickNumber+".svg")
         $(".underwatered-1").show();
         $(".root-rot-1").hide(); /* can still get root rot later */
         $(".stage-1").hide(); /* can still become healthy later */
-        sunlight = true;
+        /* TEXT */
+        $(".underwatered-text").show();
+        $(".nurture-text").hide();
+        $(".rot-text").hide();
+        /* If plant is rotting then other buttons only show root-rot-1 */
+        /* CANNOT BE SAVED FROM ROOT ROT */
+        if (rot){
+          $(".root-rot-1").show();
+          $(".underwatered-1").remove();
+          $(".stage-1").remove();
+          /* TEXT */
+          $(".rot-text").show();
+          $(".nurture-text").remove(); /* remove bc it can't happen anymore */
+          $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
+          /* ROOT ROT RESULT */
+          if (clickNumber == 13){
+            $(".rot-result").show();
+            $(".rot-text").remove(); /* remove bc it won't show up again */
+          }
+        }
       });
+    });
+
+/* SUNLIGHT clicked once */
+/* If plant is rotting then other buttons only show root-rot-1 */
+    $(".sunlight-button").click(function(){
+      /* if UNDERWATERED then hide healthy ".stage-1" */
+      if (sunlight){
+        $(".stage-1").hide();
+      }
+      if (rot){
+        $(".root-rot-1").show();
+        $(".underwatered-1").remove();
+        $(".stage-1").remove();
+        /* TEXT */
+        $(".rot-text").show();
+        $(".nurture-text").remove(); /* remove bc it can't happen anymore */
+        $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
+        /* ROOT ROT RESULT */
+        if (clickNumber == 13){
+          $(".rot-result").show();
+          $(".rot-text").remove(); /* remove bc it won't show up again */
+        }
+      }
+    });
+
+/* LEAVE clicked once */
+/* If plant is rotting then other buttons only show root-rot-1 */
+/* CANNOT BE SAVED FROM ROOT ROT */
+    $(".leave-button").click(function(){
+      if (rot){
+        $(".root-rot-1").show();
+        $(".underwatered-1").remove();
+        $(".stage-1").remove();
+        /* TEXT */
+        $(".rot-text").show();
+        $(".nurture-text").remove(); /* remove bc it can't happen anymore */
+        $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
+        /* ROOT ROT RESULT */
+        if (clickNumber == 13){
+          $(".rot-result").show();
+          $(".rot-text").remove(); /* remove bc it won't show up again */
+        }
+      }
     });
 
 /* HEALTHY > brought back from underwatering */
@@ -136,7 +211,30 @@ $(function(){
         $(".stage-1").show();
         $(".underwatered-1").hide(); /* can still be underwatered later */
         $("root-rot-1").hide(); /* can still get root rot later */
+        /* TEXT */
+        $(".rot-text").hide(); /* can still get root rot later */
+        $(".nurture-text").show();
+        $(".underwatered-text").hide(); /* can still be underwatered later */
       }
+      /* If plant is rotting then other buttons only show root-rot-1 */
+      /* CANNOT BE SAVED FROM ROOT ROT */
+      /*??? MAYBE keep */
+      $(".water-button").click(function(){
+        if (rot){
+        $(".root-rot-1").show();
+        $(".underwatered-1").remove();
+        $(".stage-1").remove();
+        /* TEXT */
+        $(".rot-text").show();
+        $(".nurture-text").remove(); /* remove bc it can't happen anymore */
+        $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
+        }
+        /* ROOT ROT RESULT */
+        if (clickNumber == 13){
+          $(".rot-result").show();
+          $(".rot-text").remove(); /* remove bc it won't show up again */
+        }
+      });
     });
 
 /* Remove buttons after reaching end of sequence */

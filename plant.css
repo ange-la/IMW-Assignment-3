@@ -26,16 +26,6 @@ button {
 button:active {
   background-color: #21512b;
 }
-h2 {
-  color: #21512b;
-  font-family: 'abril_fatfaceregular';
-  font-size: 20px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-h2:active {
-  color: #ffffff;
-}
 .buttons {
   margin-left: auto;
   margin-right: auto;
@@ -46,6 +36,17 @@ h2:active {
 }
 .water-button, .sunlight-button, .leave-button {
   display: none;
+}
+/* BUTTON TEXT */
+h2 {
+  color: #21512b;
+  font-family: 'abril_fatfaceregular';
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+h2:active {
+  color: #ffffff;
 }
 
 
@@ -79,7 +80,7 @@ h1 {
   margin-bottom: 560px;
 }
 /* FALSE OUTCOME TEXT */
-.rot-text {
+.rot-text, .underwatered-text {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';
@@ -93,7 +94,8 @@ h1 {
   margin-bottom: 560px;
   display: none;
 }
-.neglected-text {
+/* OUTCOME TEXT */
+.true-text, .rot-result {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';
@@ -106,48 +108,6 @@ h1 {
   margin-top: 30px;
   margin-bottom: 560px;
   display: none;
-}
-.underwatered-text, .scorched-text {
-  color: #ffffff;
-  font-size: 20px;
-  font-family: 'abril_fatfaceregular';
-  letter-spacing: 2px;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  text-decoration: none;
-  margin-top: 30px;
-  margin-bottom: 560px;
-  display: none;
-}
-/* TRUE OUTCOME TEXT */
-.true-text{
-  color: #ffffff;
-  font-size: 20px;
-  font-family: 'abril_fatfaceregular';
-  letter-spacing: 2px;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  text-decoration: none;
-  margin-top: 30px;
-  margin-bottom: 560px;
-  display: none;
-}
-.remove-text {
-  color: #ffffff;
-  font-size: 20px;
-  font-family: 'abril_fatfaceregular';
-  letter-spacing: 2px;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  text-decoration: none;
-  margin-top: 60px;
-  margin-bottom: 560px;
 }
 
 
@@ -234,8 +194,7 @@ h1 {
 }
 
 
-
-/* CORPSE FLOWER GROWING */
+/* CORPSE FLOWER IMAGES */
 img {
   height: 700px;
   width: auto;
@@ -244,12 +203,9 @@ img {
   margin-right: auto;
   display: flex;
 }
-
-.stage-1 {
-  display: block;
-}
-
-/* corpse flower ROOT ROT */
-.root-rot-1 {
+/* .stage-1 > HEALTHY CORPSE FLOWER */
+/* .root-rot-1 > ROTTING CORPSE FLOWER */
+/* .underwatered-1 > UNDERWATERED CORPSE FLOWER */
+.stage-1, .root-rot-1, .underwatered-1 {
   display: block;
 }
