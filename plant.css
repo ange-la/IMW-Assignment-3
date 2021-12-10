@@ -29,12 +29,17 @@ button:active {
 .buttons {
   margin-left: auto;
   margin-right: auto;
-  padding-top: 90px;
+  padding-top: 40px;
   justify-content: space-around;
   position: relative;
   top: 0px;
 }
 .water-button, .sunlight-button, .leave-button {
+  display: none;
+}
+/* WHAT IS THAT STENCH? buttons */
+.insecticide-button, .prune-button, .leaveTwo-button,
+.harvest-button {
   display: none;
 }
 /* BUTTON TEXT */
@@ -66,7 +71,7 @@ h1 {
   margin-top: 340px;
   text-decoration: none;
 }
-.nurture-text {
+.nurture-text, .remove-text {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';
@@ -78,24 +83,13 @@ h1 {
   text-decoration: none;
   margin-top: 30px;
   margin-bottom: 560px;
+  padding-bottom: 50px;
 }
 /* FALSE OUTCOME TEXT */
-.rot-text, .underwatered-text {
-  color: #ffffff;
-  font-size: 20px;
-  font-family: 'abril_fatfaceregular';
-  letter-spacing: 2px;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  text-decoration: none;
-  margin-top: 30px;
-  margin-bottom: 560px;
-  display: none;
-}
 /* OUTCOME TEXT */
-.true-text, .rot-result {
+/* HARVEST TEXT */ 
+.rot-text, .underwatered-text, .true-text, .rot-result,
+.harvest-text {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';
@@ -107,31 +101,47 @@ h1 {
   text-decoration: none;
   margin-top: 30px;
   margin-bottom: 560px;
+  padding-bottom: 50px;
   display: none;
 }
-
 
 /* First page option colours */
 .nurture-flower {
   background-color: #000000;
-  width: 100%;
+  width: 50%;
   height: 100%;
   top: 0px;
   left: 0px;
   position: absolute;
   text-decoration: none;
 }
-
-.nurture-flower:hover {
+.nurture-flower:hover, .remove-stench:hover {
   box-shadow: 2px 2px;
   background-color: #21512b;
 }
-
+.remove-stench {
+  background-color: #000000;
+  width: 50%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  position: absolute;
+  text-decoration: none;
+}
 
 /* Full screen for chosen option */
 /* DISPLAY: NONE; at first until option chosen > more in js */
 .full-nurture {
   background-color: #21512b;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+.full-remove {
+  background-color: #0f2414;
   width: 100%;
   height: 100%;
   position: absolute;

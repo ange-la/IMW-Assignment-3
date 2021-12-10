@@ -4,11 +4,28 @@
 $(document).ready(function(){
   $(".nurture-flower").click(function(){
     $(".nurture-flower").hide();
+    $(".remove-stench").hide();
     $(".full-nurture").show();
     $(".stage-1").hide(); /* STAGE 1 HIDDEN HERE */
     $(".root-rot-1").hide(); /* FALSE Root Rot hidden here */
     $(".underwatered-1").hide(); /* FALSE Underwatered hidden here */
   });
+/*------------------------------------------------------------------------*/
+/* CLICKED "REMOVE THE STENCH" option */
+  $(".remove-stench").click(function(){
+    $(".nurture-flower").hide();
+    $(".remove-stench").hide();
+    $(".full-remove").show();
+    $(".insecticide-button").show();
+    $(".prune-button").show();
+    $(".leaveTwo-button").show();
+    $(".harvest-button").hide();
+    $(".wither-1").show(); /* WITHER-1 will show up from the beginning */
+    $(".berry").hide();
+    $(".seed").hide();
+  });
+/*------------------------------------------------------------------------*/
+/* CLICKED "NURTURE THE TITAN ARUM" option */
 /* FIRST BUTTON = "PLANT SEED" then shows the other buttons */
   $(".plant-button").click(function(){
     $(".plant-button").hide();
@@ -25,25 +42,28 @@ $(document).ready(function(){
   $(".sunlight-button").click(function(){
     $(".stage-1").show();
   });
-
-/*  $(".leave-button").click(function(){
-    $(".stage-1").hide();
-  }); */
 });
 
-
-
+/*------------------------------------------------------------------------*/
 /* Simpler solution (Arrays) by Professor Ali Qadeer */
 /* TRUE SEQUENCES */
 const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
 "water","sunlight","leave","leave","leave","water","sunlight","leave"];
-
 const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
 "sunlight","water","leave","leave","leave","sunlight","water"];
-
 const nurtureSequence3 = ["plant","leave","sunlight","water","leave","leave",
 "leave","sunlight","water","leave","leave","leave","sunlight","water"];
 
+/* WHAT IS THAT STENCH? sequences */
+const witherSequence = ["leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo",
+"leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","harvest","plant"];
+const insecticideSequence = ["insecticide","insecticide","insecticide","insecticide",
+"insecticide","insecticide","insecticide","insecticide","insecticide","insecticide",
+"insecticide","harvest","plant"]
+const pruneSequence = ["prune","prune","prune","prune","prune","prune","prune",
+"prune","prune","prune","prune","prune","prune",];
+
+/* Variables for the upcoming functions */
 var sunlight;
 var water;
 var rot;
@@ -92,7 +112,7 @@ $(function(){
     } else if (buttonClicked == nurtureSequence2[clickNumber]){
       console.log("TRUE-2")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
-/* Things appear below here if "false" */
+/* SEQUENCE 3 */
     } else if (buttonClicked == nurtureSequence3[clickNumber]){
       console.log("TRUE-3")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
@@ -237,6 +257,76 @@ $(function(){
       });
     });
 
+/*------------------------------------------------------------------------*/
+
+/* WHAT IS THAT STENCH? */
+/* WITHER SEQUENCE 1 */
+    if (buttonClicked == witherSequence[clickNumber]){
+      console.log("LEAVE")
+      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".berry").attr("src","IMW-A3-Elements/berry.svg")
+      $(".seed").attr("src","IMW-A3-Elements/seed.svg")
+      if (clickNumber == 10){
+        $(".leaveTwo-button").hide();
+        $(".prune-button").hide();
+        $(".insecticide-button").hide();
+        $(".remove-text").hide();
+        $(".harvest-button").show();
+        $(".harvest-text").show();
+      }
+/* INSECTICIDE REMOVES THE INSECT (small black specs in background) */
+    } else if (buttonClicked == insecticideSequence[clickNumber]){
+      console.log("insecticide")
+      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".berry").attr("src","IMW-A3-Elements/berry.svg")
+      $(".seed").attr("src","IMW-A3-Elements/seed.svg")
+      if (clickNumber == 10){
+        $(".leaveTwo-button").hide();
+        $(".prune-button").hide();
+        $(".insecticide-button").hide();
+        $(".remove-text").hide();
+        $(".harvest-button").show();
+        $(".harvest-text").show();
+      }
+/* PRUNING WILL REMOVE THE PLANT FASTER */
+    } else if (buttonClicked == pruneSequence[clickNumber]){
+      console.log("prune")
+      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+    }
+
+/* PRUNING WILL REMOVE THE PLANT FASTER */
+    $(".prune-button").click(function(){
+      if (clickNumber == 6){
+        $("button").hide();
+        $(".wither-1").hide();
+        $(".remove-text").hide();
+        $(".harvest-button").show();
+        $(".harvest-text").show();
+      }
+    });
+
+/* INSECTICIDE REMOVES THE INSECT (small black specs in background) */
+    $(".insecticide-button").click(function(){
+      $(".wither-1").show();
+      if (clickNumber == 10){
+        $(".leaveTwo-button").hide();
+        $(".prune-button").hide();
+        $(".insecticide-button").hide();
+        $(".remove-text").hide();
+        $(".harvest-button").show();
+        $(".harvest-text").show();
+      }
+    });
+
+/* Harvest button will be replaced by plantTwo button */
+    $(".harvest-button").click(function(){
+      $(".harvest-button").hide();
+      $(".wither-1").hide(); /* WITHER-1 is removed and only berry remains */
+      $(".small-soil").hide();
+      $(".berry").show(); /* red BERRY appears */
+    });
+
+/*------------------------------------------------------------------------*/
 /* Remove buttons after reaching end of sequence */
     if (clickNumber == 13){
       $("button").hide();
