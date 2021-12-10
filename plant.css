@@ -38,7 +38,7 @@ button:active {
   display: none;
 }
 /* WHAT IS THAT STENCH? buttons */
-.insecticide-button, .prune-button, .leaveTwo-button,
+.insecticide-button, .leaveTwo-button,
 .harvest-button, .waterTwo-button {
   display: none;
 }

@@ -17,7 +17,6 @@ $(document).ready(function(){
     $(".remove-stench").hide();
     $(".full-remove").show();
     $(".insecticide-button").show();
-    $(".prune-button").show();
     $(".leaveTwo-button").show();
     $(".waterTwo-button").show();
     $(".harvest-button").hide();
@@ -63,9 +62,7 @@ const witherSequence = ["leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo",
 "leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","harvest","plant"];
 const insecticideSequence = ["insecticide","insecticide","insecticide","insecticide",
 "insecticide","insecticide","insecticide","insecticide","insecticide","insecticide",
-"insecticide","harvest","plant"]
-const pruneSequence = ["prune","prune","prune","prune","prune","prune","prune",
-"prune","prune","prune","prune","prune","prune"];
+"insecticide","insecticide","insecticide"];
 const waterSequence = ["waterTwo","waterTwo","waterTwo","waterTwo","waterTwo",
 "waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo"];
 
@@ -223,11 +220,6 @@ $(function(){
         $(".rot-text").show();
         $(".nurture-text").remove(); /* remove bc it can't happen anymore */
         $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
-        /* ROOT ROT RESULT */
-        if (clickNumber == 13){
-          $(".rot-result").show();
-          $(".rot-text").remove(); /* remove bc it won't show up again */
-        }
       }
     });
 
@@ -264,17 +256,23 @@ $(function(){
     });
 
 /*------------------------------------------------------------------------*/
+/* WHAT IS THAT STENCH? option */
+/* ARRAYS for this are at the top of the page */
+
 var rotFlies;
 var rotNF;
+var witherFlies;
 
 /* waterTwo darkens the soil */
 /* Soil will not lighten with other buttons */
+/* addEventListener @ https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener */
+/* @ https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery */
+/* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
     document.getElementById("waterTwo-button").addEventListener("click",function(){
       $(".soil-ground").css({'background-color': '#201613'});
       $(".small-soil-nurture").css({'background-color': '#100b0a'});
     });
 
-/* WHAT IS THAT STENCH? */
 /* WITHER SEQUENCE 1 */
     if (buttonClicked == witherSequence[clickNumber]){
       console.log("LEAVE")
@@ -285,7 +283,6 @@ var rotNF;
       $(".seed").attr("src","IMW-A3-Elements/seed.svg")
       if (clickNumber == 10){
         $(".leaveTwo-button").hide();
-        $(".prune-button").hide();
         $(".insecticide-button").hide();
         $(".waterTwo-button").hide();
         $(".remove-text").hide();
@@ -296,78 +293,36 @@ var rotNF;
     } else if (buttonClicked == insecticideSequence[clickNumber]){
       console.log("insecticide")
       $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
-      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
       $(".seed").attr("src","IMW-A3-Elements/seed.svg")
       if (clickNumber == 10){
         $(".leaveTwo-button").hide();
-        $(".prune-button").hide();
         $(".insecticide-button").hide();
         $(".waterTwo-button").hide();
         $(".remove-text").hide();
         $(".harvest-button").show();
         $(".harvest-text").show();
       }
-/* PRUNING WILL REMOVE THE PLANT FASTER */
-    } else if (buttonClicked == pruneSequence[clickNumber]){
-      console.log("prune")
-      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
-      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
-      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
+/* WATER ROTS THE TITAN ARUM + brings flies */
+/* TITAN ARUM CANNOT RECOVER FROM ROT but flies can be removed */
+/* berries can not be recovered if rotted */
     } else if (buttonClicked == waterSequence[clickNumber]){
       console.log("water")
-      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
       $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
-      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
     }
-
-/* PRUNING WILL REMOVE THE PLANT FASTER */
-    $(".prune-button").click(function(){
-      if (clickNumber == 8){
-        $("button").hide();
-        $(".remove-text").hide();
-        $(".harvest-button").show();
-        $(".harvest-text").show();
-      }
-      /* IF ROTTED no flies */
-      if (rotNF){
-        $(".wither-1").hide();
-        $(".rotFlies-1").hide();
-        $(".rotNF-1").show();
-      /* IF ROTTED with flies */
-      }
-      if (rotFlies){
-        $(".wither-1").hide();
-        $(".rotFlies-1").show();
-        $(".rotNF-1").hide();
-      }
-    });
 
 /* INSECTICIDE REMOVES THE INSECT (small grey specs in background) */
     $(".insecticide-button").click(function(){
       $(".wither-1").show();
-      $(".flies-1").hide();
-      $(".rotNF-1").hide();
-      $(".rotFlies-1").hide()
-      if (clickNumber == 10){
-        $(".leaveTwo-button").hide();
-        $(".prune-button").hide();
-        $(".insecticide-button").hide();
-        $(".waterTwo-button").hide();
-        $(".remove-text").hide();
-        $(".harvest-button").show();
-        $(".harvest-text").show();
-      }
       if (rotFlies){
         rotNF = true;
         $(".wither-1").hide();
         $(".flies-1").hide();
         $(".rotNF-1").show(); /* will stay rotted if .rotFlies-1 was activated */
-        $(".rotFlies-1").hide();
+        $(".rotFlies-1").hide();  /* will stay rotted if .rotFlies-1 was activated */
         if (clickNumber == 10){
           $(".leaveTwo-button").hide();
-          $(".prune-button").hide();
           $(".insecticide-button").hide();
           $(".waterTwo-button").hide();
           $(".remove-text").hide();
@@ -377,11 +332,29 @@ var rotNF;
       }
     });
 
+/* leaveTwo button */
+    $(".leaveTwo-button").click(function(){
+      if (rotFlies){
+        $(".wither-1").hide();
+        $(".flies-1").hide();
+        $(".rotNF-1").hide(); /* will stay rotted if .rotFlies-1 was activated */
+        $(".rotFlies-1").show();  /* will stay rotted if .rotFlies-1 was activated */
+      }
+      if (rotNF){
+        $(".wither-1").hide();
+        $(".flies-1").hide();
+        $(".rotNF-1").hide(); /* will stay rotted if .rotFlies-1 was activated */
+        $(".rotFlies-1").show();  /* will stay rotted if .rotFlies-1 was activated */
+      }
+    });
+
 /* WATERING BRINGS BACK INSECTS while rotting (small grey specs in background) */
-/* Soil also darkens when watered */
+/* TITAN ARUM CANNOT RECOVER FROM ROT but flies can be removed */
+/* berries can not be recovered if rotted */
     $(".waterTwo-button").click(function(){
       rotFlies = true;
       $(".wither-1").hide();
+      $(".flies-1").hide();
       $(".rotNF-1").hide();
       $(".rotFlies-1").show(); /* WILL ALWAYS BE FLIES + ROT WHEN WATERED */
     });
@@ -398,7 +371,7 @@ var rotNF;
     });
 
 /*------------------------------------------------------------------------*/
-/* Remove buttons after reaching end of sequence */
+/* Remove all buttons after reaching end of sequence / 13 clicks */
     if (clickNumber == 13){
       $("button").hide();
     }
