@@ -88,7 +88,8 @@ h1 {
 }
 /* HIDDEN TEXT */
 .rot-text, .underwatered-text, .true-text, .rot-result,
-.harvest-text, .neglect-text, .berry-text, .witherRot-text {
+.harvest-text, .neglect-text, .berry-text, .witherRot-text,
+.underwatered-result {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';
