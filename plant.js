@@ -47,9 +47,14 @@ $(document).ready(function(){
   });
 });
 
+
+
+
+
+
 /*------------------------------------------------------------------------*/
 /* Simpler solution (Arrays) by Professor Ali Qadeer */
-/* TRUE SEQUENCES */
+/* SEQUENCES for FULL-NURTURE + FULL-REMOVE options */
 const nurtureSequence1 = ["plant","water","sunlight","leave","leave","leave",
 "water","sunlight","leave","leave","leave","water","sunlight","leave"];
 const nurtureSequence2 = ["plant","sunlight","water","leave","leave","leave",
@@ -65,6 +70,8 @@ const insecticideSequence = ["insecticide","insecticide","insecticide","insectic
 "insecticide","insecticide","insecticide"];
 const waterSequence = ["waterTwo","waterTwo","waterTwo","waterTwo","waterTwo",
 "waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo"];
+const leaveTwo = ["leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo",
+"leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo",];
 
 /* Variables for the upcoming functions */
 var sunlight;
@@ -221,6 +228,20 @@ $(function(){
         $(".nurture-text").remove(); /* remove bc it can't happen anymore */
         $(".underwatered-text").remove(); /* remove bc it can't happen anymore */
       }
+
+
+
+
+
+
+      /* CHECK THIS  > make sure no other text appears???*/
+      if (clickNumber == 13){
+        $(".neglect-text").show();
+        $(".nurture-text").hide();
+        $(".rot-text").hide();
+        $(".rot-result").hide();
+        $(".true-text").hide();
+      }
     });
 
 /* HEALTHY > brought back from underwatering */
@@ -255,13 +276,18 @@ $(function(){
       });
     });
 
+
+
+
+
+
 /*------------------------------------------------------------------------*/
 /* WHAT IS THAT STENCH? option */
 /* ARRAYS for this are at the top of the page */
 
 var rotFlies;
 var rotNF;
-var witherFlies;
+var witherInsecticide;
 
 /* waterTwo darkens the soil */
 /* Soil will not lighten with other buttons */
@@ -270,7 +296,7 @@ var witherFlies;
 /* @ https://stackoverflow.com/questions/38418062/how-can-i-trigger-an-event-after-two-different-buttons-have-been-clicked */
     document.getElementById("waterTwo-button").addEventListener("click",function(){
       $(".soil-ground").css({'background-color': '#201613'});
-      $(".small-soil-nurture").css({'background-color': '#100b0a'});
+      $(".small-soil").css({'background-color': '#100b0a'});
     });
 
 /* WITHER SEQUENCE 1 */
@@ -282,10 +308,12 @@ var witherFlies;
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
       $(".seed").attr("src","IMW-A3-Elements/seed.svg")
       if (clickNumber == 10){
+        /* NOT removing ALL the buttons */
         $(".leaveTwo-button").hide();
         $(".insecticide-button").hide();
         $(".waterTwo-button").hide();
         $(".remove-text").hide();
+        /* Harvest button shows up for "healthy" withered plant */
         $(".harvest-button").show();
         $(".harvest-text").show();
       }
@@ -296,69 +324,134 @@ var witherFlies;
       $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
       $(".seed").attr("src","IMW-A3-Elements/seed.svg")
+      /* if not rotted yet > remove flies + "healthy" */
+      witherInsecticide = true;
+      $(".wither-1").show();
+      $(".flies-1").hide();
       if (clickNumber == 10){
+        /* NOT removing ALL the buttons */
         $(".leaveTwo-button").hide();
         $(".insecticide-button").hide();
         $(".waterTwo-button").hide();
         $(".remove-text").hide();
+        /* Harvest button shows up for "healthy" withered plant */
         $(".harvest-button").show();
         $(".harvest-text").show();
       }
 /* WATER ROTS THE TITAN ARUM + brings flies */
-/* TITAN ARUM CANNOT RECOVER FROM ROT but flies can be removed */
-/* berries can not be recovered if rotted */
+    } else if (buttonClicked == leaveTwo[clickNumber]){
+      console.log("leaveTwo")
+      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".flies-1").attr("src","IMW-A3-Elements/flies-"+clickNumber+".svg")
+      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      /* if not rotted + has flies */
+      $(".leaveTwo-button").click(function(){
+        $(".wither-1").hide();
+        $(".flies-1").show();
+      });
+/* Harvest button will NOT show up for rotted Titan Arum */
     } else if (buttonClicked == waterSequence[clickNumber]){
       console.log("water")
       $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".waterTwo-button").click(function(){
+        rotFlies = true;
+        $(".wither-1").hide();
+        $(".flies-1").hide();
+        $(".rotNF-1").hide();
+        $(".rotFlies-1").show(); /* WILL ALWAYS BE FLIES + ROT WHEN WATERED */
+        /* ALL buttons HIDDEN with rot */
+        /* berries can not be recovered if rotted */
+        if (clickNumber == 11){
+          /* ALL buttons HIDDEN */
+          $("button").hide();
+          $(".harvest-text").hide();
+          $(".wither-1").hide();
+          $(".flies-1").hide();
+          $(".rotNF-1").hide();
+          $(".berry").hide();
+          /* rot + flies and no berries */
+          $(".remove-text").hide();
+          $(".rotFlies-1").show();
+          $(".witherRot-text").show();
+        }
+      });
     }
 
+
+
+
+
 /* INSECTICIDE REMOVES THE INSECT (small grey specs in background) */
+/* TITAN ARUM CANNOT RECOVER FROM ROT but flies can be removed */
     $(".insecticide-button").click(function(){
-      $(".wither-1").show();
+      /* if watered > rotted */
       if (rotFlies){
         rotNF = true;
         $(".wither-1").hide();
         $(".flies-1").hide();
         $(".rotNF-1").show(); /* will stay rotted if .rotFlies-1 was activated */
         $(".rotFlies-1").hide();  /* will stay rotted if .rotFlies-1 was activated */
-        if (clickNumber == 10){
+        if (clickNumber == 11){
+          /* NOT removing ALL the buttons */
           $(".leaveTwo-button").hide();
           $(".insecticide-button").hide();
           $(".waterTwo-button").hide();
           $(".remove-text").hide();
-          $(".harvest-button").show();
-          $(".harvest-text").show();
+          /* Harvest button doesn't show up for rotted plant */
+          /* berries can not be recovered if rotted */
+          $(".harvest-button").hide();
+          $(".harvest-text").hide();
+          /* RESULT TEXT FOR ROT */
+          $(".witherRot-text").show();
         }
       }
     });
 
-/* leaveTwo button */
+
+
+/* WORK ON THIS */
+/* leaveTwo button if plant is ROTTED */
     $(".leaveTwo-button").click(function(){
-      if (rotFlies){
-        $(".wither-1").hide();
+      /* IF rotted + insecticide = rotNF (rot No Flies) */
+      if (witherInsecticide){
+        $(".wither-1").show();
         $(".flies-1").hide();
         $(".rotNF-1").hide(); /* will stay rotted if .rotFlies-1 was activated */
-        $(".rotFlies-1").show();  /* will stay rotted if .rotFlies-1 was activated */
+        $(".rotFlies-1").hide();  /* will stay rotted if .rotFlies-1 was activated */
       }
-      if (rotNF){
+      else if (rotNF){
         $(".wither-1").hide();
         $(".flies-1").hide();
-        $(".rotNF-1").hide(); /* will stay rotted if .rotFlies-1 was activated */
-        $(".rotFlies-1").show();  /* will stay rotted if .rotFlies-1 was activated */
+        $(".rotFlies-1").show();
+        $(".rotNF-1").hide();
+        if (clickNumber == 10){
+          /* ALL buttons HIDDEN with rot */
+          $("button").hide();
+          /* berry doesn't show up because of rot */
+          $(".harvest-text").hide();
+          $(".berry").hide();
+          /* rot result TEXT */
+          $(".remove-text").hide();
+          $(".witherRot-text").show();
+        }
+      } else if (rotFlies){
+        $(".wither-1").hide();
+        $(".flies-1").hide();
+        $(".rotFlies-1").show();
+        $(".rotNF-1").hide();
+        if (clickNumber == 10){
+          /* ALL buttons HIDDEN with rot */
+          $("button").hide();
+          /* berry doesn't show up because of rot */
+          $(".berry").hide();
+          $(".harvest-text").hide();
+          /* rot result TEXT */
+          $(".remove-text").hide();
+          $(".witherRot-text").show();
+        }
       }
     });
-
-/* WATERING BRINGS BACK INSECTS while rotting (small grey specs in background) */
-/* TITAN ARUM CANNOT RECOVER FROM ROT but flies can be removed */
-/* berries can not be recovered if rotted */
-    $(".waterTwo-button").click(function(){
-      rotFlies = true;
-      $(".wither-1").hide();
-      $(".flies-1").hide();
-      $(".rotNF-1").hide();
-      $(".rotFlies-1").show(); /* WILL ALWAYS BE FLIES + ROT WHEN WATERED */
-    });
-
 /* Harvest button will be replaced by plantTwo button */
     $(".harvest-button").click(function(){
       $(".harvest-button").hide();
@@ -366,12 +459,20 @@ var witherFlies;
       $(".flies-1").hide(); /* FLIES-1 is removed and only berry remains */
       $(".rotFlies-1").hide();
       $(".rotNF-1").hide();
-      $(".small-soil").hide();
+      $(".small-soil").hide(); /* small-soil hidden because plant is removed */
+      $(".harvest-text").hide();
       $(".berry").show(); /* red BERRY appears */
+      $(".berry-text").show(); /* replaces harvest-text */
     });
+
+
+
+
+
 
 /*------------------------------------------------------------------------*/
 /* Remove all buttons after reaching end of sequence / 13 clicks */
+/* Mainly for FULL-NURTURE option*/
     if (clickNumber == 13){
       $("button").hide();
     }

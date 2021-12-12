@@ -71,6 +71,7 @@ h1 {
   margin-top: 340px;
   text-decoration: none;
 }
+/* NOT HIDDEN TEXT */
 .nurture-text, .remove-text {
   color: #ffffff;
   font-size: 20px;
@@ -85,11 +86,9 @@ h1 {
   margin-bottom: 560px;
   padding-bottom: 50px;
 }
-/* FALSE OUTCOME TEXT */
-/* OUTCOME TEXT */
-/* HARVEST TEXT */
+/* HIDDEN TEXT */
 .rot-text, .underwatered-text, .true-text, .rot-result,
-.harvest-text {
+.harvest-text, .neglect-text, .berry-text, .witherRot-text {
   color: #ffffff;
   font-size: 20px;
   font-family: 'abril_fatfaceregular';
