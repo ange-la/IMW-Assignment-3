@@ -238,6 +238,16 @@ $(function(){
             $(".underwatered-text").hide();
             $(".true-text").show(); /* healthy text result */
           }
+          if (overwaterAgain){
+            if (clickNumber == 14){
+              $(".root-rot-1").show();
+              $(".nurture-text").hide();
+              $(".rot-text").hide();
+              $(".underwatered-text").hide();
+              $(".true-text").hide(); /* healthy text result */
+              $(".rot-result").show(); /* rot text result */
+            }
+          }
         }
         /* OVERWATERED after click water again affter REVIVE */
         if (reviveWater){
