@@ -79,6 +79,7 @@ var underwatered;
 var reviveWater;
 var overwaterAgain;
 var overwaterLeave;
+var leave;
 
 let clickNumber = 0;
 
@@ -127,14 +128,9 @@ $(function(){
     });
 /* original LEAVE */
 /* only works if WATER or SUNLIGHT buttons were clicked before */
-/*    $(".leave-button").click(function(){
-      if (water){
-        $(".stage-1").show();
-      }
-      if (sunlight){
-        $(".stage-1").show();
-      }
-    }); */
+    $(".leave-button").click(function(){
+      leave = true;
+    });
 
 
 
@@ -143,10 +139,20 @@ $(function(){
     if (buttonClicked == nurtureSequence1[clickNumber]){
       console.log("TRUE-1")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+      /* true TEXT RESULT */
+      if (clickNumber == 13){
+        $(".nurture-text").hide();
+        $(".true-text").show(); /* healthy text result */
+      }
 /* SEQUENCE 2 */
     } else if (buttonClicked == nurtureSequence2[clickNumber]){
       console.log("TRUE-2")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
+      /* true TEXT RESULT */
+      if (clickNumber == 13){
+        $(".nurture-text").hide();
+        $(".true-text").show(); /* healthy text result */
+      }
 /* FALSE OUTCOMES */
     } else {
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
@@ -166,51 +172,53 @@ $(function(){
           $(".rot-text").hide();
           $(".underwatered-text").show(); /* underwatered text */
           if (clickNumber == 14){
-            $(".nurture-text").remove();
-            $(".rot-text").remove();
-            $(".underwatered-text").remove();
+            $(".nurture-text").hide();
+            $(".rot-text").hide();
+            $(".underwatered-text").hide();
             $(".underwatered-result").show(); /* underwatered text result */
-          /* If plant is rotting then other buttons only show root-rot-1 */
           }
         }
+        /* If plant is rotting then other buttons only show root-rot-1 */
         if (overwatered){
           console.log("OVERWATERED!")
-          $(".stage-1").remove();
-          $(".underwatered-1").remove();
+          $(".stage-1").hide();
+          $(".underwatered-1").hide();
           $(".root-rot-1").show();
           /* TEXT */
-          $(".nurture-text").remove();
-          $(".underwatered-text").remove();
+          $(".nurture-text").hide();
+          $(".underwatered-text").hide();
           $(".rot-text").show();
           if (clickNumber == 14){
-            $("nurture-text").remove();
-            $(".rot-text").remove();
-            $(".underwatered-text").remove();
-            $("rot-result").show(); /* rot text result */
+            $("nurture-text").hide();
+            $(".rot-text").hide();
+            $(".underwatered-text").hide();
+            $(".rot-result").show(); /* rot text result */
+            $(".underwatered-result").hide();
           }
         }
         if (overwaterAgain){
           overwaterLeave = true;
           console.log("OVERWATERED!")
-          $(".stage-1").remove();
-          $(".underwatered-1").remove();
+          $(".stage-1").hide();
+          $(".underwatered-1").hide();
           $(".root-rot-1").show();
           /* TEXT */
-          $(".nurture-text").remove();
-          $(".underwatered-text").remove();
+          $(".nurture-text").hide();
+          $(".underwatered-text").hide();
           $(".rot-text").show();
           if (clickNumber == 14){
-            $("nurture-text").remove();
-            $(".rot-text").remove();
-            $(".underwatered-text").remove();
-            $("rot-result").show(); /* rot text result */
+            $("nurture-text").hide();
+            $(".rot-text").hide();
+            $(".underwatered-text").hide();
+            $(".rot-result").show(); /* rot text result */
+            $(".underwatered-result").hide();
           }
         }
       });
       /* WATER */
-      /* REVIVE UNDERWATER + OVERWATERED */
+      /* REVIVE UNDERWATERED + OVERWATERED */
       $(".water-button").click(function(){
-        /* REVIVE */
+        /* REVIVE from underwatering */
         if (underwatered){
           console.log("REVIVED!")
           reviveWater = true;
@@ -222,59 +230,72 @@ $(function(){
           $(".underwatered-text").hide();
           $(".nurture-text").show();
           if (clickNumber == 14){
-            $(".nurture-text").remove();
-            $(".rot-text").remove();
-            $(".underwatered-text").remove();
+            $(".nurture-text").hide();
+            $(".rot-text").hide();
+            $(".underwatered-text").hide();
             $(".true-text").show(); /* healthy text result */
           }
-
-
-
-
-
-          /* problem THIS IS SHOWING AT THE SAME TIME AS THE ONE ABOVE */
-        /* OVERWATERED after REVIVE */
         }
-      if (reviveWater){
-          overwaterAgain = true;
-          console.log("OVERWATERED AGAIN!")
-          $(".stage-1").remove(); /* can no longer be saved */
-          $(".underwatered-1").remove(); /* can no longer be underwatered */
-          $(".root-rot-1").show();
-          /* TEXT */
-          $(".nurture-text").remove();
-          $(".underwatered-text").remove();
-          $(".rot-text").show();
-          if (clickNumber == 14){
-            $(".nurture-text").remove();
-            $(".rot-text").remove();
-            $(".underwatered-text").remove();
-            $(".true-text").remove();
-            $(".rot-result").show(); /* rot text result */
-          }
+        /* OVERWATERED after click water again affter REVIVE */
+        if (reviveWater){
+          $(".water-button").click(function(){
+            overwaterAgain = true;
+            console.log("OVERWATERED AGAIN!")
+            $(".stage-1").hide(); /* can no longer be saved */
+            $(".underwatered-1").hide(); /* can no longer be underwatered */
+            $(".root-rot-1").show();
+            /* TEXT */
+            $(".nurture-text").hide();
+            $(".underwatered-text").hide();
+            $(".rot-text").show();
+            if (clickNumber == 14){
+              $(".nurture-text").hide();
+              $(".rot-text").hide();
+              $(".underwatered-text").hide();
+              $(".true-text").hide();
+              $(".rot-result").show(); /* rot text result */
+            }
+          });
         /* OVERWATERED */
         } else if (water){
           console.log("OVERWATERED!!");
           overwatered = true;
-          $(".stage-1").remove(); /* can no longer be saved */
-          $(".underwatered-1").remove(); /* can no longer be underwatered */
+          $(".stage-1").hide(); /* can no longer be saved */
+          $(".underwatered-1").hide(); /* can no longer be underwatered */
           $(".root-rot-1").show();
           /* TEXT */
-          $(".nurture-text").remove();
-          $(".underwatered-text").remove();
+          $(".nurture-text").hide();
+          $(".underwatered-text").hide();
           $(".rot-text").show();
           if (clickNumber == 14){
-            $(".nurture-text").remove();
-            $(".rot-text").remove();
-            $(".underwatered-text").remove();
+            $(".nurture-text").hide();
+            $(".rot-text").hide();
+            $(".underwatered-text").hide();
             $(".rot-result").show(); /* rot text result */
           }
         }
       });
+
+
+
+
+
       /* LEAVE */
       /* OVERWATERED + OVERWATERED */
       $(".leave-button").click(function(){
         /* UNDERWATERED stays underwatered */
+        if (leave){
+          $(".stage-1").hide();
+          $(".underwatered-1").show();
+          if (clickNumber == 14){
+            $(".nurture-text").remove();
+            $(".rot-text").remove();
+            $(".underwatered-text").hide();
+            $(".underwatered-result").hide();
+            $(".true-text").hide();
+            $(".neglect-text").show(); /* neglect text result */
+          }
+        }
         if (underwatered){
           $(".stage-1").hide(); /* can be revived */
           $(".root-rot-1").hide(); /* can still get root rot */
@@ -286,11 +307,13 @@ $(function(){
           if (clickNumber == 14){
             $(".nurture-text").remove();
             $(".rot-text").remove();
-            $(".underwatered-text").remove();
+            $(".underwatered-text").hide();
             $(".underwatered-result").show(); /* underwatered text result */
+            $(".neglect-text").hide();
+            $(".true-text").hide();
           }
-        /* OVERWATERED stays overwatered */
         }
+        /* OVERWATERED stays overwatered */
         if (overwatered){
           $(".stage-1").remove(); /* cannot be revived anymore */
           $(".underwatered-1").remove(); /* cannot be underwatered anymore */
@@ -304,6 +327,9 @@ $(function(){
             $(".underwatered-text").remove();
             $(".rot-text").remove();
             $(".rot-result").show(); /* rot text result */
+            $(".underwatered-result").hide();
+            $(".neglect-text").hide();
+            $(".true-text").hide();
           }
         }
         if (overwaterLeave){
@@ -319,6 +345,9 @@ $(function(){
             $(".underwatered-text").remove();
             $(".rot-text").remove();
             $(".rot-result").show(); /* rot text result */
+            $(".underwatered-result").hide();
+            $(".neglect-text").hide();
+            $(".true-text").hide();
           }
         }
         if (overwaterAgain){
@@ -334,6 +363,9 @@ $(function(){
             $(".underwatered-text").remove();
             $(".rot-text").remove();
             $(".rot-result").show(); /* rot text result */
+            $(".underwatered-result").hide();
+            $(".neglect-text").hide();
+            $(".true-text").hide();
           }
         }
       });
@@ -482,22 +514,25 @@ var witherInsecticide;
         $(".rotNF-1").hide(); /* will stay rotted if .rotFlies-1 was activated */
         $(".rotFlies-1").hide();  /* will stay rotted if .rotFlies-1 was activated */
       }
-      else if (rotNF){
-        $(".wither-1").hide();
-        $(".flies-1").hide();
-        $(".rotFlies-1").show();
-        $(".rotNF-1").hide();
-        if (clickNumber == 10){
-          /* ALL buttons HIDDEN with rot */
-          $("button").hide();
-          /* berry doesn't show up because of rot */
-          $(".harvest-text").hide();
-          $(".berry").hide();
-          /* rot result TEXT */
-          $(".remove-text").hide();
-          $(".witherRot-text").show();
-        }
-      } else if (rotFlies){
+      if (rotNF){
+        $(".leaveTwo-button").click(function(){
+          $(".wither-1").hide();
+          $(".flies-1").hide();
+          $(".rotFlies-1").hide();
+          $(".rotNF-1").show();
+          if (clickNumber == 10){
+            /* ALL buttons HIDDEN with rot */
+            $("button").hide();
+            /* berry doesn't show up because of rot */
+            $(".harvest-text").hide();
+            $(".berry").hide();
+            /* rot result TEXT */
+            $(".remove-text").hide();
+            $(".witherRot-text").show();
+          }
+        });
+      }
+      if (rotFlies){
         $(".wither-1").hide();
         $(".flies-1").hide();
         $(".rotFlies-1").show();

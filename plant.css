@@ -31,9 +31,22 @@ button:active {
   margin-right: auto;
   padding-top: 40px;
   justify-content: space-around;
+  display: flex;
   position: relative;
-  top: 0px;
+  top: 45px;
+  width: 600px;
 }
+/* PLANT BUTTON ONLY */
+.plant-button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -50px;
+  justify-content: space-around;
+  display: flex;
+  position: relative;
+  top: 15px;
+}
+/* NURTURE THE TITAN ARUM buttons */
 .water-button, .sunlight-button, .leave-button {
   display: none;
 }
@@ -95,9 +108,6 @@ h1 {
   font-family: 'abril_fatfaceregular';
   letter-spacing: 2px;
   text-align: center;
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
   text-decoration: none;
   margin-top: 30px;
   margin-bottom: 560px;
