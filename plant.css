@@ -52,7 +52,8 @@ button:active {
 }
 /* WHAT IS THAT STENCH? buttons */
 .insecticide-button, .leaveTwo-button,
-.harvest-button, .waterTwo-button {
+.harvest-button, .waterTwo-button, .rotInsect-button,
+.leaveRot-button {
   display: none;
 }
 /* BUTTON TEXT */
