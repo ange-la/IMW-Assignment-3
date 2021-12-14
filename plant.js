@@ -269,8 +269,9 @@ $(function(){
               $(".rot-result").show(); /* rot text result */
             }
           });
+        }
         /* OVERWATERED */
-        } else if (water){
+        if (water){
           console.log("OVERWATERED!!");
           overwatered = true;
           $(".stage-1").hide(); /* can no longer be saved */
@@ -288,11 +289,6 @@ $(function(){
           }
         }
       });
-
-
-
-
-
       /* LEAVE */
       /* OVERWATERED + OVERWATERED */
       $(".leave-button").click(function(){
