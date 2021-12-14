@@ -141,33 +141,33 @@ $(function(){
       console.log("TRUE-1")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
       /* true TEXT RESULT */
-      if (clickNumber == 13){
+      if (clickNumber == 14){
         $(".nurture-text").hide();
         $(".true-text").show(); /* healthy text result */
       }
       if (overwatered){
-        if (clickNumber == 13){
+        if (clickNumber == 14){
           $(".nurture-text").hide();
           $(".true-text").hide(); /* healthy text result */
           $(".rot-result").show();
         }
       }
       if (overwaterAgain){
-        if (clickNumber == 13){
+        if (clickNumber == 14){
           $(".nurture-text").hide();
           $(".true-text").hide(); /* healthy text result */
           $(".rot-result").show();
         }
       }
       if (overwaterLeave){
-        if (clickNumber == 13){
+        if (clickNumber == 14){
           $(".nurture-text").hide();
           $(".true-text").hide(); /* healthy text result */
           $(".rot-result").show();
         }
       }
       if (reviveWater){
-        if (clickNumber == 13){
+        if (clickNumber == 14){
           $(".nurture-text").hide();
           $(".true-text").hide(); /* healthy text result */
           $(".rot-result").show();
@@ -178,7 +178,7 @@ $(function(){
       console.log("TRUE-2")
       $(".stage-1").attr("src","IMW-A3-Elements/corpse-flower-"+clickNumber+".svg")
       /* true TEXT RESULT */
-      if (clickNumber == 13){
+      if (clickNumber == 14){
         $(".nurture-text").hide();
         $(".true-text").show(); /* healthy text result */
       }
@@ -265,6 +265,26 @@ $(function(){
             $(".true-text").show(); /* healthy text result */
           }
           if (overwaterAgain){
+            if (clickNumber == 14){
+              $(".root-rot-1").show();
+              $(".nurture-text").hide();
+              $(".rot-text").hide();
+              $(".underwatered-text").hide();
+              $(".true-text").hide(); /* healthy text result */
+              $(".rot-result").show(); /* rot text result */
+            }
+          }
+          if (overwatered) {
+            if (clickNumber == 14){
+              $(".root-rot-1").show();
+              $(".nurture-text").hide();
+              $(".rot-text").hide();
+              $(".underwatered-text").hide();
+              $(".true-text").hide(); /* healthy text result */
+              $(".rot-result").show(); /* rot text result */
+            }
+          }
+          if (overwaterLeave) {
             if (clickNumber == 14){
               $(".root-rot-1").show();
               $(".nurture-text").hide();
@@ -438,9 +458,15 @@ var witherInsecticide;
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
 /* LEAVE BUTTON */
       $(".leaveTwo-button").click(function(){
+        if (clickNumber == 10){
+          $("buttons").hide();
+        }
         if (witherInsecticide){
           $(".wither-1").show();
           $(".flies-1").hide();
+          if (clickNumber == 10){
+            $("buttons").hide();
+          }
         }
       });
       if (clickNumber == 10){
@@ -585,6 +611,16 @@ var witherInsecticide;
             $(".witherRot-text").show();
           }
         }
+        if (clickNumber == 11){
+          /* ALL buttons HIDDEN with rot */
+          $("button").hide();
+          /* berry doesn't show up because of rot */
+          $(".berry").hide();
+          $(".harvest-text").hide();
+          /* rot result TEXT */
+          $(".remove-text").hide();
+          $(".witherRot-text").show();
+        }
       });
     }
 
@@ -612,7 +648,7 @@ var witherInsecticide;
 
 /*------------------------------------------------------------------------*/
 /* Remove all buttons after reaching end of sequence / 13 clicks */
-/* Mainly for FULL-NURTURE option*/
+/* For the FULL-NURTURE option*/
     if (clickNumber == 13){
       $("button").hide();
     }
