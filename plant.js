@@ -69,8 +69,6 @@ const rotInsectSequence = ["rotInsect","rotInsect","rotInsect","rotInsect","rotI
 "rotInsect"];
 const waterSequence = ["waterTwo","waterTwo","waterTwo","waterTwo","waterTwo",
 "waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo","waterTwo"];
-/*const leaveTwo = ["leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo",
-"leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo","leaveTwo",]; */
 const leaveRot = ["leaveRot","leaveRot","leaveRot","leaveRot","leaveRot","leaveRot",
 "leaveRot","leaveRot","leaveRot","leaveRot","leaveRot","leaveRot"];
 
@@ -410,7 +408,6 @@ var witherInsecticide;
       $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
-      $(".seed").attr("src","IMW-A3-Elements/seed.svg")
 /* LEAVE BUTTON */
       $(".leaveTwo-button").click(function(){
         if (witherInsecticide){
@@ -432,10 +429,11 @@ var witherInsecticide;
 /* INSECTICIDE REMOVES THE INSECT (small black specs in background) */
     } else if (buttonClicked == insecticideSequence[clickNumber]){
       console.log("insecticide")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".berry").attr("src","IMW-A3-Elements/berry.svg")
-      $(".seed").attr("src","IMW-A3-Elements/seed.svg")
       /* if not rotted yet > remove flies + "healthy" */
       witherInsecticide = true;
       $(".insecticide-button").click(function(){
@@ -458,7 +456,9 @@ var witherInsecticide;
 /* WATER ROTS THE TITAN ARUM + brings flies */
     } else if (buttonClicked == rotInsectSequence[clickNumber]){
       console.log("rotInsect")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       /* if watered > rotted */
       $(".rotInsect-button").click(function(){
@@ -479,19 +479,14 @@ var witherInsecticide;
           $(".witherRot-text").show();
         }
       });
-  /*  } else if (buttonClicked == leaveTwo[clickNumber]){
-      console.log("leaveTwo")
-      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
-      $(".flies-1").attr("src","IMW-A3-Elements/flies-"+clickNumber+".svg")
-      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
-      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
-      /* if not rotted + has flies */
-
 /* waterTwo BUTTON */
 /* Harvest button will NOT show up for rotted Titan Arum */
     } else if (buttonClicked == waterSequence[clickNumber]){
       console.log("water")
       $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".wither-1").attr("src","IMW-A3-Elements/wither-"+clickNumber+".svg")
+      $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
+      $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       $(".waterTwo-button").click(function(){
         rotFlies = true;
         $(".wither-1").hide();
@@ -526,43 +521,43 @@ var witherInsecticide;
       $(".rotFlies-1").attr("src","IMW-A3-Elements/rotFlies-"+clickNumber+".svg")
       $(".rotNF-1").attr("src","IMW-A3-Elements/rotNF-"+clickNumber+".svg")
       /* leaveTwo button if plant is ROTTED */
-          $(".leaveRot-button").click(function(){
-            /* IF rotted + insecticide = rotNF (rot No Flies) */
-            /* if ROT no flies */
-            if (rotNF){
-              $(".wither-1").hide();
-              $(".flies-1").hide();
-              $(".rotFlies-1").hide();
-              $(".rotNF-1").show();
-              if (clickNumber == 10){
-                /* ALL buttons HIDDEN with rot */
-                $("button").hide();
-                /* berry doesn't show up because of rot */
-                $(".harvest-text").hide();
-                $(".berry").hide();
-                /* rot result TEXT */
-                $(".remove-text").hide();
-                $(".witherRot-text").show();
-              }
-            }
-            /* if ROT with FLIES */
-            if (rotFlies){
-              $(".wither-1").hide();
-              $(".flies-1").hide();
-              $(".rotFlies-1").show();
-              $(".rotNF-1").hide();
-              if (clickNumber == 10){
-                /* ALL buttons HIDDEN with rot */
-                $("button").hide();
-                /* berry doesn't show up because of rot */
-                $(".berry").hide();
-                $(".harvest-text").hide();
-                /* rot result TEXT */
-                $(".remove-text").hide();
-                $(".witherRot-text").show();
-              }
-            }
-          });
+      $(".leaveRot-button").click(function(){
+        /* IF rotted + insecticide = rotNF (rot No Flies) */
+        /* if ROT no flies */
+        if (rotNF){
+          $(".wither-1").hide();
+          $(".flies-1").hide();
+          $(".rotFlies-1").hide();
+          $(".rotNF-1").show();
+          if (clickNumber == 10){
+            /* ALL buttons HIDDEN with rot */
+            $("button").hide();
+            /* berry doesn't show up because of rot */
+            $(".harvest-text").hide();
+            $(".berry").hide();
+            /* rot result TEXT */
+            $(".remove-text").hide();
+            $(".witherRot-text").show();
+          }
+        }
+        /* if ROT with FLIES */
+        if (rotFlies){
+          $(".wither-1").hide();
+          $(".flies-1").hide();
+          $(".rotFlies-1").show();
+          $(".rotNF-1").hide();
+          if (clickNumber == 10){
+            /* ALL buttons HIDDEN with rot */
+            $("button").hide();
+            /* berry doesn't show up because of rot */
+            $(".berry").hide();
+            $(".harvest-text").hide();
+            /* rot result TEXT */
+            $(".remove-text").hide();
+            $(".witherRot-text").show();
+          }
+        }
+      });
     }
 
 
