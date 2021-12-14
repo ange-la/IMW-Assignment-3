@@ -145,6 +145,34 @@ $(function(){
         $(".nurture-text").hide();
         $(".true-text").show(); /* healthy text result */
       }
+      if (overwatered){
+        if (clickNumber == 13){
+          $(".nurture-text").hide();
+          $(".true-text").hide(); /* healthy text result */
+          $(".rot-result").show();
+        }
+      }
+      if (overwaterAgain){
+        if (clickNumber == 13){
+          $(".nurture-text").hide();
+          $(".true-text").hide(); /* healthy text result */
+          $(".rot-result").show();
+        }
+      }
+      if (overwaterLeave){
+        if (clickNumber == 13){
+          $(".nurture-text").hide();
+          $(".true-text").hide(); /* healthy text result */
+          $(".rot-result").show();
+        }
+      }
+      if (reviveWater){
+        if (clickNumber == 13){
+          $(".nurture-text").hide();
+          $(".true-text").hide(); /* healthy text result */
+          $(".rot-result").show();
+        }
+      }
 /* SEQUENCE 2 */
     } else if (buttonClicked == nurtureSequence2[clickNumber]){
       console.log("TRUE-2")
@@ -441,7 +469,7 @@ var witherInsecticide;
         $(".flies-1").hide();
         $(".rotFlies-1").hide();
         $(".rotNF-1").hide();
-        if (clickNumber == 10){
+        if (clickNumber == 11){
           /* NOT removing ALL the buttons */
           $(".leaveTwo-button").hide();
           $(".insecticide-button").hide();
